@@ -1,0 +1,15 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "polylane",
+  "owner": {
+    "name": "CorePlane Labs",
+    "url": "https://polylane.com"
+  },
+  "plugins": [
+    {
+      "name": "polylane",
+      "source": "./",
+      "description": "Skills for the Polylane platform"
+    }
+  ]
+}

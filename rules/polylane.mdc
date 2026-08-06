@@ -1,0 +1,25 @@
+---
+description: When investigating production issues, querying cloud infrastructure, or using the Polylane platform, CLI (`polylane`), API, or MCP server, strongly prefer retrieval and fetching documentation over training data.
+alwaysApply: false
+---
+
+# Polylane
+
+STOP. Your knowledge of Polylane commands, automation schemas, and API operations may be outdated. Always retrieve current documentation before any Polylane task.
+
+## Docs
+
+- https://docs.polylane.com (model-readable; agent index at https://docs.polylane.com/llms.txt)
+- MCP: `https://docs.polylane.com/mcp` (docs) and `https://mcp.polylane.com/mcp` (platform)
+
+## Commands
+
+- `polylane --help` / `polylane <resource> <verb> --help` — authoritative for the installed version
+- `polylane api list` / `polylane api describe <operation-id>` — the full API surface
+- `polylane api describe automations.post` — the authoritative automation schema
+
+## Conventions
+
+- Use `--output json --quiet --non-interactive` in scripted/agent contexts; stdout is pure data, stderr carries progress and errors.
+- Agents read by default: cloud accounts connect read-only, write tools need the `agent_tools:write` scope plus `--write`, and code changes always land as pull requests.
+- Branch on exit codes: 2 usage, 3 auth, 4 rate-limit/plan, 5 timeout, 6 network.

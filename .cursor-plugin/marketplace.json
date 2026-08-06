@@ -1,0 +1,13 @@
+{
+  "name": "polylane",
+  "owner": {
+    "name": "CorePlane Labs"
+  },
+  "plugins": [
+    {
+      "name": "polylane",
+      "source": "./",
+      "description": "Skills for the Polylane platform"
+    }
+  ]
+}

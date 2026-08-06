@@ -1,0 +1,12 @@
+{
+  "name": "polylane",
+  "version": "0.1.0",
+  "description": "Skills for the Polylane platform: context graph, issue detection, investigations, automations, agent tools, and the polylane CLI",
+  "author": {
+    "name": "CorePlane Labs",
+    "email": "support@polylane.com",
+    "url": "https://polylane.com"
+  },
+  "keywords": ["polylane", "observability", "incidents", "investigations", "automations", "sre", "devops", "context-graph", "cli"],
+  "logo": "logo.svg"
+}
