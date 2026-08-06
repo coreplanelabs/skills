@@ -1,6 +1,6 @@
 ---
 name: polylane-automations
-description: Author, scope, and operate Polylane automations — unattended agent runs wired as trigger → instructions → tools → actions → destinations. Use when the user wants to react to alerts, deploys, pushes, cron schedules, or webhooks with an agent; roll back bad deployments automatically; auto-triage alerts into issues; run scheduled reports; or route automation results to Slack, email, or webhooks. Biases towards retrieval from Polylane docs over pre-trained knowledge.
+description: Author, scope, and operate Polylane automations — unattended agent runs wired as trigger → instructions → tools → actions → destinations. Use when the user wants something to happen without them — "whenever X happens", "on every deploy", "every morning", "auto-rollback if it breaks" — including reacting to alerts, incidents, deploys, pushes, cron schedules, or webhooks; rolling back bad deployments automatically; auto-triaging alerts into issues; scheduled reports and recurring production health checks; incident-response automation; and routing results to Slack, email, or webhooks. Retrieve from Polylane docs — never guess commands or schemas.
 ---
 
 # Polylane Automations

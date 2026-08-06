@@ -1,6 +1,6 @@
 ---
 name: polylane-cli
-description: Use `polylane` to investigate production issues, explore cloud infrastructure (logs / metrics / dependency graphs), search code, save memories, run automations from a catalog, connect observability tools and cloud accounts, and drive threads with the Polylane agent. Use when the user wants to debug a production issue, look up a service, search their codebase, manage integrations, connect a cloud provider, or talk to the Polylane agent from the terminal.
+description: Drive Polylane from the terminal with the `polylane` CLI — investigate production issues, incidents, and alerts; search logs and query metrics; explore cloud resources, services, and dependency graphs; check what's deployed; search code; save memories; run automations from a catalog; connect observability tools and cloud accounts; and drive threads with the Polylane agent. Use when the work happens in a shell or script, when the user asks for the CLI, or when the Polylane MCP tools are not connected — to debug prod, look up a service or resource, search the codebase, manage integrations, connect a cloud provider, or talk to the Polylane agent. Retrieve (`--help`, `polylane api describe`) — never guess commands or flags.
 ---
 
 # Polylane CLI — Agent Skill Guide

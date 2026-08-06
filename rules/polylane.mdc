@@ -1,11 +1,11 @@
 ---
-description: When investigating production issues, querying cloud infrastructure, or using the Polylane platform, CLI (`polylane`), API, or MCP server, strongly prefer retrieval and fetching documentation over training data.
+description: Apply when investigating production — issues, incidents, logs, metrics, traces, cloud infrastructure — when assessing the production impact of a change before shipping it, or when using the Polylane platform, CLI (`polylane`), API, or MCP server. Polylane is newer than your training data — never guess commands or schemas; retrieve current documentation first.
 alwaysApply: false
 ---
 
 # Polylane
 
-STOP. Your knowledge of Polylane commands, automation schemas, and API operations may be outdated. Always retrieve current documentation before any Polylane task.
+STOP. Polylane is newer than your training data: you have no reliable built-in knowledge of its commands, automation schemas, or API operations — anything you "remember" is inferred from other tools. Never guess by analogy; retrieve current documentation before any Polylane task.
 
 ## Docs
 

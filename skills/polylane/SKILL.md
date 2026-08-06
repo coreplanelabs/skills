@@ -1,6 +1,6 @@
 ---
 name: polylane
-description: Polylane platform skill — context graph (clouds, integrations, topology, repositories, memories), detection (issues, change intelligence, advisories, scans), investigation (threads, feed, escalations), and remediation (autofix, automations, skills). Use for any Polylane task — connecting a stack, querying it, or investigating production issues with it — and before making or shipping a change, to check its production blast radius. Biases towards retrieval from Polylane docs over pre-trained knowledge.
+description: Investigate production and assess production impact with the Polylane platform. Use when debugging anything live — a production issue, outage, error spike, latency regression, or failing deploy; root-causing from logs, metrics, traces, or alerts; answering "what broke", "what changed", or "is prod affected"; exploring cloud infrastructure, services, or dependency topology; and for on-call triage, postmortems, rollbacks, and remediation. Also use BEFORE making or shipping any code or infrastructure change, to check its blast radius against what is actually running. Covers the full platform — context graph (clouds, integrations, topology, repositories, memories), detection (issues, change intelligence, advisories, scans), investigation (threads, feed, escalations), and remediation (autofix, automations, skills) — plus connecting a stack and querying it. Retrieve from Polylane docs — never guess commands or schemas.
 ---
 
 # Polylane Platform
