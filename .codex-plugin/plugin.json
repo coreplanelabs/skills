@@ -1,0 +1,45 @@
+{
+  "name": "polylane",
+  "version": "0.1.0",
+  "description": "Investigate production, assess change impact, and automate operations with Polylane.",
+  "author": {
+    "name": "CorePlane Labs",
+    "email": "support@polylane.com",
+    "url": "https://polylane.com"
+  },
+  "homepage": "https://docs.polylane.com/coding-agents/",
+  "repository": "https://github.com/coreplanelabs/skills",
+  "keywords": [
+    "polylane",
+    "observability",
+    "incidents",
+    "sre",
+    "devops",
+    "automations",
+    "context-graph"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Polylane",
+    "shortDescription": "Investigate and automate production operations",
+    "longDescription": "Connect Codex to Polylane's production context graph, telemetry, code, incidents, and automations. Investigate live issues, assess blast radius before changes, and build reviewed operational workflows.",
+    "developerName": "CorePlane Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://polylane.com",
+    "privacyPolicyURL": "https://polylane.com/privacy/",
+    "termsOfServiceURL": "https://polylane.com/terms/",
+    "defaultPrompt": [
+      "Set up Polylane for this project and connect the production stack.",
+      "Investigate this production issue with Polylane and summarize the evidence.",
+      "Build a scoped Polylane automation for this recurring operational task."
+    ],
+    "brandColor": "#15151A",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}
