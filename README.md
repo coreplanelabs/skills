@@ -17,7 +17,26 @@ Install using the [plugin marketplace](https://code.claude.com/docs/en/discover-
 
 ### Cursor
 
-Add manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
+Install the **Polylane** plugin from the Cursor Marketplace once it is listed (this repo is the plugin — manifest in [`.cursor-plugin/`](.cursor-plugin/)), or add the MCP server directly:
+
+[Add to Cursor](https://cursor.com/install-mcp?name=polylane&config=eyJ1cmwiOiJodHRwczovL21jcC5wb2x5bGFuZS5jb20vbWNwIn0=)
+
+**Manual** — add this to your `mcp.json` (project `.cursor/mcp.json` or global `~/.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "polylane": {
+      "type": "http",
+      "url": "https://mcp.polylane.com/mcp"
+    }
+  }
+}
+```
+
+The server uses OAuth 2.0 with dynamic client registration — on first use, Cursor opens your browser to sign in to Polylane and authorize the connection. No API keys or environment variables are needed.
+
+The skills can also be added manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
 
 ### npx skills
 
@@ -75,6 +94,19 @@ This plugin includes Polylane's remote MCP servers:
 |--------|-----|---------|
 | polylane | `https://mcp.polylane.com/mcp` | Query the workspace: context graph, telemetry across connected providers, code, and the full REST API |
 | polylane-docs | `https://docs.polylane.com/mcp` | Search and read the Polylane documentation |
+
+### Tools (`polylane` server)
+
+| Tool | What it does |
+| --- | --- |
+| `search` | Find Polylane REST API operations and their schemas: tracked issues, investigation threads, context graph resources. |
+| `execute` | Call the Polylane REST API: read tracked issues, investigation threads, and context graph resources. |
+| `searchTools` | List the workspace's agent tools with their input schemas: live logs, metrics, traces, deployments, and the context graph. |
+| `runTool` | Run an agent tool to read live production state. Read-only by default; writes require write access and a session opt-in. |
+| `runCode` | Chain several agent tools in one TypeScript call for multi-step production investigations. |
+| `startMapping` | Start or resume mapping the current repository into the workspace topology. |
+| `advanceMapping` | Submit a mapping phase's results and receive the next directive; the final submission publishes the topology. |
+| `getMappingStatus` | Read the mapping session's phase, next directive, and terminal payload. Read-only. |
 
 ## Resources
 

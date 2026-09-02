@@ -7,7 +7,7 @@
     {
       "name": "polylane",
       "source": "./",
-      "description": "Skills for the Polylane platform"
+      "description": "Polylane skills, commands, and MCP servers: investigate production issues with live logs, metrics, traces, deployments, and the cloud infrastructure context graph"
     }
   ]
 }
