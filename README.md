@@ -1,10 +1,24 @@
-# Polylane Skills
+# Polylane Agent Plugin
 
-A collection of [Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) for working with [Polylane](https://polylane.com) — the agent-powered production operations platform: connect your clouds, repositories, and observability tools; detect, investigate, and remediate production issues.
+A cross-agent plugin and collection of Agent Skills for working with [Polylane](https://polylane.com) — the agent-powered production operations platform: connect your clouds, repositories, and observability tools; detect, investigate, and remediate production issues.
 
 ## Installing
 
 These skills work with any agent that supports the Agent Skills standard, including Claude Code, OpenCode, OpenAI Codex, and Pi.
+
+### OpenAI Codex plugin
+
+Install the repository marketplace, then install the plugin:
+
+```bash
+codex plugin marketplace add coreplanelabs/skills --ref main
+codex plugin add polylane@polylane
+```
+
+Restart the desktop app and start a new task so Codex loads the plugin's skills
+and MCP servers. The Codex package manifest is at
+`.codex-plugin/plugin.json`; the repository marketplace is at
+`.agents/plugins/marketplace.json`.
 
 ### Claude Code
 
@@ -47,9 +61,10 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 | OpenAI Codex | `~/.codex/skills/` | [docs](https://developers.openai.com/codex/skills/) |
 | Pi | `~/.pi/agent/skills/` | [docs](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#skills) |
 
-## Commands
+## Claude Code commands
 
-Commands are user-invocable slash commands that you explicitly call.
+Claude Code commands are user-invocable slash commands that you explicitly
+call. Codex surfaces the same three workflows as starter prompts on the plugin.
 
 | Command | Description |
 |---------|-------------|
@@ -83,3 +98,11 @@ This plugin includes Polylane's remote MCP servers:
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
 - [Polylane Map](https://docs.polylane.com/coding-agents/map) — map a repo with no signup: `https://api.polylane.com/v1/public/maps/prompt.md`
 - [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
+
+## Publishing to OpenAI
+
+The Codex manifest and repository marketplace support local and team
+distribution. Public publication uses OpenAI's plugin submission portal and a
+separate review. The prepared listing copy, reviewer fixtures, test cases,
+release notes, and submission checklist live in
+[`submission/README.md`](submission/README.md).
