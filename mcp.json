@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "polylane": {
+      "type": "http",
+      "url": "https://mcp.polylane.com/mcp"
+    },
+    "polylane-docs": {
+      "type": "http",
+      "url": "https://docs.polylane.com/mcp"
+    }
+  }
+}
