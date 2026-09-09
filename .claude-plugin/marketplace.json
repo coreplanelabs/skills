@@ -12,7 +12,7 @@
       "name": "polylane",
       "source": "./",
       "description": "Polylane skills, commands, and MCP servers: investigate production issues with live logs, metrics, traces, deployments, and the cloud infrastructure context graph",
-      "homepage": "https://docs.polylane.com/coding-agents/",
+      "homepage": "https://docs.polylane.com/coding-agents/plugins",
       "repository": "https://github.com/coreplanelabs/skills",
       "license": "MIT",
       "category": "devops",

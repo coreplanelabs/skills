@@ -124,6 +124,7 @@ This plugin includes Polylane's remote MCP servers:
 
 ## Resources
 
+- [Plugin docs](https://docs.polylane.com/coding-agents/plugins) — install steps for Claude Code, Cursor, and OpenAI Codex
 - [Polylane Documentation](https://docs.polylane.com) — model-readable; agent index at [`/llms.txt`](https://docs.polylane.com/llms.txt)
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
