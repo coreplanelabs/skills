@@ -1,15 +1,33 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "polylane",
+  "description": "Polylane plugins for coding agents: production investigation, change impact, and operational automations",
   "owner": {
     "name": "CorePlane Labs",
+    "email": "support@polylane.com",
     "url": "https://polylane.com"
   },
   "plugins": [
     {
       "name": "polylane",
       "source": "./",
-      "description": "Skills for the Polylane platform"
+      "description": "Polylane skills, commands, and MCP servers: investigate production issues with live logs, metrics, traces, deployments, and the cloud infrastructure context graph",
+      "homepage": "https://docs.polylane.com/coding-agents/",
+      "repository": "https://github.com/coreplanelabs/skills",
+      "license": "MIT",
+      "category": "devops",
+      "keywords": [
+        "polylane",
+        "observability",
+        "incidents",
+        "investigations",
+        "automations",
+        "sre",
+        "devops",
+        "context-graph",
+        "mcp",
+        "cli"
+      ]
     }
   ]
 }

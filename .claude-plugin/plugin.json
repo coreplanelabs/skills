@@ -1,8 +1,26 @@
 {
   "name": "polylane",
-  "description": "Skills for the Polylane platform: context graph, issue detection, investigations, automations, agent tools, and the polylane CLI",
-  "version": "0.1.0",
+  "displayName": "Polylane",
+  "version": "1.0.0",
+  "description": "Investigate production issues and assess change impact with Polylane: live logs, metrics, traces, deployments, the cloud infrastructure context graph, automations, and the polylane CLI",
   "author": {
-    "name": "CorePlane Labs"
-  }
+    "name": "CorePlane Labs",
+    "email": "support@polylane.com",
+    "url": "https://polylane.com"
+  },
+  "homepage": "https://docs.polylane.com/coding-agents/",
+  "repository": "https://github.com/coreplanelabs/skills",
+  "license": "MIT",
+  "keywords": [
+    "polylane",
+    "observability",
+    "incidents",
+    "investigations",
+    "automations",
+    "sre",
+    "devops",
+    "context-graph",
+    "mcp",
+    "cli"
+  ]
 }

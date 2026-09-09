@@ -4,21 +4,7 @@ A cross-agent plugin and collection of Agent Skills for working with [Polylane](
 
 ## Installing
 
-These skills work with any agent that supports the Agent Skills standard, including Claude Code, OpenCode, OpenAI Codex, and Pi.
-
-### OpenAI Codex plugin
-
-Install the repository marketplace, then install the plugin:
-
-```bash
-codex plugin marketplace add coreplanelabs/skills --ref main
-codex plugin add polylane@polylane
-```
-
-Restart the desktop app and start a new task so Codex loads the plugin's skills
-and MCP servers. The Codex package manifest is at
-`.codex-plugin/plugin.json`; the repository marketplace is at
-`.agents/plugins/marketplace.json`.
+These skills work with any agent that supports the Agent Skills standard, including Claude Code, Cursor, OpenAI Codex, OpenCode, and Pi.
 
 ### Claude Code
 
@@ -52,6 +38,20 @@ The server uses OAuth 2.0 with dynamic client registration — on first use, Cur
 
 The skills can also be added manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
 
+### OpenAI Codex
+
+Install the repository marketplace, then install the plugin:
+
+```bash
+codex plugin marketplace add coreplanelabs/skills --ref main
+codex plugin add polylane@polylane
+```
+
+Restart the desktop app and start a new task so Codex loads the plugin's skills
+and MCP servers. The Codex package manifest is at
+`.codex-plugin/plugin.json`; the repository marketplace is at
+`.agents/plugins/marketplace.json`.
+
 ### npx skills
 
 Install using the [`npx skills`](https://skills.sh) CLI:
@@ -80,10 +80,9 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 | OpenAI Codex | `~/.codex/skills/` | [docs](https://developers.openai.com/codex/skills/) |
 | Pi | `~/.pi/agent/skills/` | [docs](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#skills) |
 
-## Claude Code commands
+## Commands
 
-Claude Code commands are user-invocable slash commands that you explicitly
-call. Codex surfaces the same three workflows as starter prompts on the plugin.
+Commands are user-invocable slash commands that you explicitly call. They ship in the Claude Code and Cursor plugins; Codex surfaces the same three workflows as starter prompts on the plugin.
 
 | Command | Description |
 |---------|-------------|
@@ -128,13 +127,16 @@ This plugin includes Polylane's remote MCP servers:
 - [Polylane Documentation](https://docs.polylane.com) — model-readable; agent index at [`/llms.txt`](https://docs.polylane.com/llms.txt)
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
-- [Polylane Map](https://docs.polylane.com/coding-agents/map) — map a repo with no signup: `https://api.polylane.com/v1/public/maps/prompt.md`
 - [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
 
-## Publishing to OpenAI
+## Publishing
 
-The Codex manifest and repository marketplace support local and team
-distribution. Public publication uses OpenAI's plugin submission portal and a
-separate review. The prepared listing copy, reviewer fixtures, test cases,
-release notes, and submission checklist live in
-[`submission/README.md`](submission/README.md).
+This repository is the single source for the Polylane plugin in three directories. Each agent reads its own manifest:
+
+| Agent | Manifest | Directory |
+|-------|----------|-----------|
+| Claude Code | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) + [`marketplace.json`](.claude-plugin/marketplace.json) | Claude plugin directory |
+| Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | Cursor Marketplace |
+| OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
+
+The OpenAI listing copy, reviewer fixtures, test cases, release notes, and submission checklist live in [`submission/README.md`](submission/README.md).
