@@ -140,3 +140,5 @@ This repository is the single source for the Polylane plugin in three directorie
 | OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
 
 The OpenAI listing copy, reviewer fixtures, test cases, release notes, and submission checklist live in [`submission/README.md`](submission/README.md).
+
+Run [`scripts/validate.sh`](scripts/validate.sh) before opening a pull request. It parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.

@@ -22,10 +22,10 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Polylane",
-    "shortDescription": "Investigate and automate production operations",
+    "shortDescription": "Investigate production issues",
     "longDescription": "Connect Codex to Polylane's production context graph, telemetry, code, incidents, and automations. Investigate live issues, assess blast radius before changes, and build reviewed operational workflows.",
     "developerName": "CorePlane Labs",
-    "category": "Productivity",
+    "category": "Developer Tools",
     "capabilities": [
       "Read",
       "Write"

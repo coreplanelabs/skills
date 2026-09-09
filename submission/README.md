@@ -24,7 +24,7 @@ above and upload the three skills to the same draft.
 | Plugin name | Polylane |
 | Developer | CorePlane Labs |
 | Category | Developer Tools |
-| Short description | Investigate and automate production operations. |
+| Short description | Investigate production issues (30-character limit; matches `interface.shortDescription`) |
 | Website | https://polylane.com |
 | Support | https://polylane.com/developers/#support |
 | Privacy policy | https://polylane.com/privacy/ |
