@@ -89,8 +89,8 @@ Before editing or shipping code that touches a live system, use the graph to see
 ├─ Terminal / scripts / CI → polylane CLI (see polylane-cli skill)
 ├─ Coding agent → platform MCP or CLI; wire both with `polylane setup`
 ├─ Programmatic → REST API (api.polylane.com/v1)
-├─ No account yet → fetch and run https://api.polylane.com/v1/public/maps/prompt.md
-│  (Polylane Map: repo + live infra → shareable page, no signup)
+├─ No account yet → `polylane auth signup`, or hand any coding agent
+│  https://api.polylane.com/v1/public/setup/prompt.md to onboard from scratch
 └─ Humans → console.polylane.com (every API object carries a _html_url deep link)
 ```
 

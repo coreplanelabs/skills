@@ -14,7 +14,7 @@ The user invoked this command with: $ARGUMENTS
 
 When this command is invoked:
 
-1. Read the skill file at `skills/polylane-cli/SKILL.md` for CLI usage, agent flags, contracts, and gotchas
+1. Load the `polylane-cli` skill bundled with this plugin for CLI usage, agent flags, contracts, and gotchas
 2. For exact flags on any command, run `polylane <resource> <verb> --help` — it is authoritative
 3. If deeper platform concepts are needed, fetch https://docs.polylane.com/raw/investigation.md
 

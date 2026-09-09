@@ -14,7 +14,7 @@ The user invoked this command with: $ARGUMENTS
 
 When this command is invoked:
 
-1. Read the skill file at `skills/polylane-cli/SKILL.md` — especially Prerequisites and the Onboarding workflow
+1. Load the `polylane-cli` skill bundled with this plugin — especially its Prerequisites and Onboarding workflow sections
 2. For per-type connect flags, run `polylane integration connect --help` / `polylane cloud connect --help` — they are authoritative
 3. For platform concepts, fetch https://docs.polylane.com/raw/getting-started.md
 
@@ -28,7 +28,7 @@ When this command is invoked:
 3. **Workspace.** `polylane workspace list`; create one if needed: `polylane workspace create --name "<name>"` (becomes the default).
 4. **Discover what can be connected.** `polylane integration catalog` (`--category tool` / `--category cloud`). Match against $ARGUMENTS and what the user's project actually uses (check the repo for provider config files before recommending).
 5. **Connect integrations and clouds.** Each type has its own flags — check `polylane integration connect --help` / `polylane cloud connect --help` first. Browser flows print an install URL to stdout and exit 0 immediately; **confirm completion afterwards** with `integration list` / `cloud list`. Never echo API keys into the command history — prefer browser flows, or let the user paste keys interactively.
-6. **Starter automations.** `polylane automation catalog`, then `polylane automation from-template <slug>` for the templates that match the user's stack. See `skills/polylane-automations/SKILL.md` for scoping custom ones.
+6. **Starter automations.** `polylane automation catalog`, then `polylane automation from-template <slug>` for the templates that match the user's stack. See the `polylane-automations` skill for scoping custom ones.
 7. **Wire up coding agents.** `polylane setup --agent claude` (and any others the user works in) installs the skill and MCP server locally.
 8. **Verify everything.**
    ```bash

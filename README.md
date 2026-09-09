@@ -1,10 +1,10 @@
-# Polylane Skills
+# Polylane Agent Plugin
 
-A collection of [Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) for working with [Polylane](https://polylane.com) — the agent-powered production operations platform: connect your clouds, repositories, and observability tools; detect, investigate, and remediate production issues.
+A cross-agent plugin and collection of Agent Skills for working with [Polylane](https://polylane.com) — the agent-powered production operations platform: connect your clouds, repositories, and observability tools; detect, investigate, and remediate production issues.
 
 ## Installing
 
-These skills work with any agent that supports the Agent Skills standard, including Claude Code, OpenCode, OpenAI Codex, and Pi.
+These skills work with any agent that supports the Agent Skills standard, including Claude Code, Cursor, OpenAI Codex, OpenCode, and Pi.
 
 ### Claude Code
 
@@ -38,6 +38,20 @@ The server uses OAuth 2.0 with dynamic client registration — on first use, Cur
 
 The skills can also be added manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
 
+### OpenAI Codex
+
+Install the repository marketplace, then install the plugin:
+
+```bash
+codex plugin marketplace add coreplanelabs/skills --ref main
+codex plugin add polylane@polylane
+```
+
+Restart the desktop app and start a new task so Codex loads the plugin's skills
+and MCP servers. The Codex package manifest is at
+`.codex-plugin/plugin.json`; the repository marketplace is at
+`.agents/plugins/marketplace.json`.
+
 ### npx skills
 
 Install using the [`npx skills`](https://skills.sh) CLI:
@@ -68,7 +82,7 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 
 ## Commands
 
-Commands are user-invocable slash commands that you explicitly call.
+Commands are user-invocable slash commands that you explicitly call. They ship in the Claude Code and Cursor plugins; Codex surfaces the same three workflows as starter prompts on the plugin.
 
 | Command | Description |
 |---------|-------------|
@@ -113,5 +127,18 @@ This plugin includes Polylane's remote MCP servers:
 - [Polylane Documentation](https://docs.polylane.com) — model-readable; agent index at [`/llms.txt`](https://docs.polylane.com/llms.txt)
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
-- [Polylane Map](https://docs.polylane.com/coding-agents/map) — map a repo with no signup: `https://api.polylane.com/v1/public/maps/prompt.md`
 - [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
+
+## Publishing
+
+This repository is the single source for the Polylane plugin in three directories. Each agent reads its own manifest:
+
+| Agent | Manifest | Directory |
+|-------|----------|-----------|
+| Claude Code | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) + [`marketplace.json`](.claude-plugin/marketplace.json) | Claude plugin directory |
+| Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | Cursor Marketplace |
+| OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
+
+The OpenAI listing copy, reviewer fixtures, test cases, release notes, and submission checklist live in [`submission/README.md`](submission/README.md).
+
+Run [`scripts/validate.sh`](scripts/validate.sh) before opening a pull request. It parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.

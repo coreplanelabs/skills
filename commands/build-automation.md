@@ -14,7 +14,7 @@ The user invoked this command with: $ARGUMENTS
 
 When this command is invoked:
 
-1. Read the skill file at `skills/polylane-automations/SKILL.md` for the automation model and authoring checklist
+1. Load the `polylane-automations` skill bundled with this plugin for the automation model and authoring checklist
 2. For the authoritative type catalogs and schema, run `polylane api describe automations.post`
 3. For filter semantics and examples, fetch https://docs.polylane.com/raw/remediation/automations/triggers.md and `.../actions.md`
 
