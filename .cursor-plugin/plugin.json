@@ -7,7 +7,7 @@
   },
   "description": "Investigate production issues from Cursor: live logs, metrics, traces, deployments, and Polylane's cloud infrastructure context graph across AWS, Cloudflare, Vercel, Kubernetes, and more.",
   "author": {
-    "name": "CorePlane Labs",
+    "name": "Coreplane Labs",
     "email": "support@polylane.com"
   },
   "homepage": "https://polylane.com",

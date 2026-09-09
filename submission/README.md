@@ -22,7 +22,7 @@ above and upload the three skills to the same draft.
 | Field | Value |
 | --- | --- |
 | Plugin name | Polylane |
-| Developer | CorePlane Labs |
+| Developer | Coreplane Labs |
 | Category | Developer Tools |
 | Short description | Investigate production issues (30-character limit; matches `interface.shortDescription`) |
 | Website | https://polylane.com |
