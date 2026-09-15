@@ -5,7 +5,7 @@ alwaysApply: false
 
 # Polylane
 
-STOP. Polylane is newer than your training data: you have no reliable built-in knowledge of its commands, automation schemas, or API operations — anything you "remember" is inferred from other tools. Never guess by analogy; retrieve current documentation before any Polylane task.
+STOP. Polylane is newer than your training data: you have no reliable built-in knowledge of its commands or API operations — anything you "remember" is inferred from other tools. Never guess by analogy; retrieve current documentation before any Polylane task.
 
 ## Docs
 
@@ -16,7 +16,6 @@ STOP. Polylane is newer than your training data: you have no reliable built-in k
 
 - `polylane --help` / `polylane <resource> <verb> --help` — authoritative for the installed version
 - `polylane api list` / `polylane api describe <operation-id>` — the full API surface
-- `polylane api describe automations.post` — the authoritative automation schema
 
 ## Conventions
 

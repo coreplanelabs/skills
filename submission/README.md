@@ -2,7 +2,7 @@
 
 This directory contains the copy, test plan, and operational checklist for
 submitting Polylane as a public OpenAI plugin. The public submission combines
-the production Polylane MCP server with the three skills in this repository.
+the production Polylane MCP server with the two skills in this repository.
 
 ## Submission type
 
@@ -11,11 +11,11 @@ the production Polylane MCP server with the three skills in this repository.
 - Production endpoint: `https://mcp.polylane.com/mcp`
 - Authentication: OAuth 2.1
 - Custom UI: none
-- Skills: `polylane`, `polylane-cli`, and `polylane-automations`
+- Skills: `polylane` and `polylane-cli`
 
 The repository's `.mcp.json` also includes the public documentation MCP for
 local plugin installs. In the public portal, submit the product MCP endpoint
-above and upload the three skills to the same draft.
+above and upload the two skills to the same draft.
 
 ## Listing copy
 
@@ -36,8 +36,8 @@ above and upload the three skills to the same draft.
 Polylane gives engineering agents a live view of production. Connect cloud,
 observability, source-control, and collaboration systems; investigate incidents
 across logs, metrics, traces, deployments, code, and dependency topology;
-assess the blast radius of a change before shipping; and build operational
-automations with explicit safety gates. Polylane is read-only by default.
+and assess the blast radius of a change before shipping. Polylane is read-only
+by default.
 Write-capable operations require additional scope, an explicit session opt-in,
 and safety review.
 
@@ -45,7 +45,7 @@ and safety review.
 
 1. Set up Polylane for this project and connect the production stack.
 2. Investigate this production issue with Polylane and summarize the evidence.
-3. Build a scoped Polylane automation for this recurring operational task.
+3. Check the production blast radius of this change with Polylane before I ship it.
 
 ## Reviewer fixture
 
@@ -59,7 +59,7 @@ workspace containing synthetic data only:
 - example logs and metrics covering the same time window;
 - one active issue linked to `checkout-api`;
 - one repository with a checkout timeout implementation and recent change; and
-- automation catalog access without permission to mutate real production.
+- writes disabled on every connected account, so agent tools stay read-only.
 
 Record the account, workspace slug, expected fixture timestamps, and any reset
 procedure in the portal's private reviewer notes. Never commit reviewer
@@ -115,18 +115,17 @@ correlate it with the linked service, logs, metrics, and recent change records.
 **Expected result:** File references, the relevant behavior in the code, and a
 carefully qualified explanation of the production relationship.
 
-### 5. Draft a safe automation
+### 5. Map the repository into the workspace
 
-**Prompt:** "Draft a Polylane automation that investigates critical checkout
-alerts, opens an issue only when evidence supports it, and reports to Slack.
-Do not create it yet."
+**Prompt:** "Map this repository into my Polylane workspace and tell me what it
+found."
 
-**Expected behavior:** Consult the live catalog or schema, scope the trigger,
-use smart gating for side effects, include a destination, and stop before any
-write operation.
+**Expected behavior:** Call `startMapping`, work through each phase with
+`advanceMapping`, and read `getMappingStatus` as needed. Submit only aggregate
+findings and file references. Do not call any provider write tool.
 
-**Expected result:** A reviewable automation definition with assumptions,
-required integrations, trigger filters, instructions, actions, and destination.
+**Expected result:** The workspace URL for the published topology plus a short
+summary of the services, dependencies, and findings that were recorded.
 
 ## Negative test cases
 
@@ -158,15 +157,14 @@ results or claim the investigation succeeded.
 
 Initial public submission of the Polylane plugin. It connects ChatGPT and Codex
 to Polylane's production MCP server and includes skills for incident
-investigation, production-impact analysis, CLI workflows, onboarding, and safe
-automation authoring.
+investigation, production-impact analysis, CLI workflows, and onboarding.
 
 ## Pre-submission checklist
 
 Repository/package:
 
 - [ ] `.codex-plugin/plugin.json` passes the plugin validator.
-- [ ] All three skills pass skill validation from the final archive layout.
+- [ ] Both skills pass skill validation from the final archive layout.
 - [ ] The plugin installs from the repository marketplace and works in a new task.
 - [ ] Logo and icon render correctly in light and dark UI.
 - [ ] Public listing links resolve successfully.
@@ -192,7 +190,7 @@ Portal:
 - [ ] Create a **With MCP** draft and enter the production endpoint directly.
 - [ ] Complete domain verification and OAuth configuration.
 - [ ] Run **Scan Tools**, resolve every validation result, and scan again after changes.
-- [ ] Upload the final three-skill bundle to the same draft.
+- [ ] Upload the final two-skill bundle to the same draft.
 - [ ] Add the starter prompts and all five positive and three negative tests.
 - [ ] Add release notes, availability, and policy attestations.
 - [ ] Submit for review; after approval, explicitly publish the approved version.

@@ -1,8 +1,8 @@
 {
   "name": "polylane",
   "displayName": "Polylane",
-  "version": "1.0.0",
-  "description": "Investigate production issues and assess change impact with Polylane: live logs, metrics, traces, deployments, the cloud infrastructure context graph, automations, and the polylane CLI",
+  "version": "1.1.0",
+  "description": "Investigate production issues and assess change impact with Polylane: live logs, metrics, traces, deployments, the cloud infrastructure context graph, and the polylane CLI",
   "author": {
     "name": "Coreplane Labs",
     "email": "support@polylane.com",
@@ -16,7 +16,6 @@
     "observability",
     "incidents",
     "investigations",
-    "automations",
     "sre",
     "devops",
     "context-graph",

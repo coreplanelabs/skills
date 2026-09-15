@@ -1,6 +1,6 @@
 ---
 name: polylane-cli
-description: Drive Polylane from the terminal with the `polylane` CLI — investigate production issues, incidents, and alerts; search logs and query metrics; explore cloud resources, services, and dependency graphs; check what's deployed; search code; save memories; run automations from a catalog; connect observability tools and cloud accounts; and drive threads with the Polylane agent. Use when the work happens in a shell or script, when the user asks for the CLI, or when the Polylane MCP tools are not connected — to debug prod, look up a service or resource, search the codebase, manage integrations, connect a cloud provider, or talk to the Polylane agent. Retrieve (`--help`, `polylane api describe`) — never guess commands or flags.
+description: Drive Polylane from the terminal with the `polylane` CLI — investigate production issues, incidents, and alerts; search logs and query metrics; explore cloud resources, services, and dependency graphs; check what's deployed; search code; save memories; connect observability tools and cloud accounts; and drive threads with the Polylane agent. Use when the work happens in a shell or script, when the user asks for the CLI, or when the Polylane MCP tools are not connected — to debug prod, look up a service or resource, search the codebase, manage integrations, connect a cloud provider, or talk to the Polylane agent. Retrieve (`--help`, `polylane api describe`) — never guess commands or flags.
 ---
 
 # Polylane CLI — Agent Skill Guide
@@ -95,7 +95,6 @@ polylane memory save "<confirmed finding>"        # teach future runs
 polylane integration catalog                      # discover what can connect
 polylane integration connect --type <type>        # per-type flags: see --help
 polylane cloud connect --provider <provider>      # per-provider flags: see --help
-polylane automation catalog && polylane automation from-template <slug>
 polylane integration list && polylane cloud list && polylane service list   # verify
 ```
 
@@ -119,10 +118,6 @@ polylane thread ask "<prompt>" --stream            # tokens to stdout
 TID=$(polylane thread ask "<prompt>" --no-wait --output json --quiet | jq -r '.id')
 polylane thread continue "$TID" "<follow-up>"
 ```
-
-### Automations
-
-Load the `polylane-automations` skill for the model and authoring checklist. Quick surface: `automation catalog` / `from-template <slug>` / `create` / `trigger <id>` / `executions <id>`. Schema: `polylane api describe automations.post`.
 
 ### Wiring coding agents
 

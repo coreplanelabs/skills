@@ -1,7 +1,7 @@
 {
   "name": "polylane",
-  "version": "1.0.0",
-  "description": "Investigate production, assess change impact, and automate operations with Polylane.",
+  "version": "1.1.0",
+  "description": "Investigate production and assess change impact with Polylane.",
   "author": {
     "name": "Coreplane Labs",
     "email": "support@polylane.com",
@@ -15,7 +15,6 @@
     "incidents",
     "sre",
     "devops",
-    "automations",
     "context-graph"
   ],
   "skills": "./skills/",
@@ -23,7 +22,7 @@
   "interface": {
     "displayName": "Polylane",
     "shortDescription": "Investigate production issues",
-    "longDescription": "Connect Codex to Polylane's production context graph, telemetry, code, incidents, and automations. Investigate live issues, assess blast radius before changes, and build reviewed operational workflows.",
+    "longDescription": "Connect Codex to Polylane's production context graph, telemetry, code, and incidents. Investigate live issues, assess blast radius before changes, and land fixes as reviewed pull requests.",
     "developerName": "Coreplane Labs",
     "category": "Developer Tools",
     "capabilities": [
@@ -36,7 +35,7 @@
     "defaultPrompt": [
       "Set up Polylane for this project and connect the production stack.",
       "Investigate this production issue with Polylane and summarize the evidence.",
-      "Build a scoped Polylane automation for this recurring operational task."
+      "Check the production blast radius of this change with Polylane before I ship it."
     ],
     "brandColor": "#15151A",
     "composerIcon": "./assets/icon.png",
