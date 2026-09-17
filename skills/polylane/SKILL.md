@@ -1,6 +1,6 @@
 ---
 name: polylane
-description: Investigate production and assess production impact with the Polylane platform. Use when debugging anything live — a production issue, outage, error spike, latency regression, or failing deploy; root-causing from logs, metrics, traces, or alerts; answering "what broke", "what changed", or "is prod affected"; exploring cloud infrastructure, services, or dependency topology; and for on-call triage, postmortems, rollbacks, and remediation. Also use BEFORE making or shipping any code or infrastructure change, to check its blast radius against what is actually running. Covers the full platform — context graph (clouds, integrations, topology, repositories, memories), detection (issues, change intelligence, advisories, scans), investigation (threads, feed, escalations), and remediation (autofix, automations, skills) — plus connecting a stack and querying it. Retrieve from Polylane docs — never guess commands or schemas.
+description: Investigate production and assess production impact with the Polylane platform. Use when debugging anything live — a production issue, outage, error spike, latency regression, or failing deploy; root-causing from logs, metrics, traces, or alerts; answering "what broke", "what changed", or "is prod affected"; exploring cloud infrastructure, services, or dependency topology; and for on-call triage, postmortems, rollbacks, and remediation. Also use BEFORE making or shipping any code or infrastructure change, to check its blast radius against what is actually running. Covers the full platform — context graph (clouds, integrations, topology, repositories, memories), detection (issues, change intelligence, advisories, scans), investigation (threads, feed, escalations), and remediation (autofix, skills) — plus connecting a stack and querying it. Retrieve from Polylane docs — never guess commands or schemas.
 ---
 
 # Polylane Platform
@@ -18,7 +18,7 @@ This file carries process and conventions — no catalogs, schemas, or limits, w
 | Platform MCP | `https://mcp.polylane.com/mcp` | Live workspace queries: graph, telemetry, code |
 | CLI help | `polylane --help`, `polylane <resource> <verb> --help` | Command surface of the installed version |
 | API | `https://api.polylane.com/v1/reference`; `polylane api list` / `api describe <op>` | Every REST operation and its schema |
-| Public catalogs | `GET /v1/public/{integrations,automations,skills}/catalog`, `GET /v1/public/billing/plans`, `GET /v1/scopes` | Integration types, templates, plans and limits, scopes |
+| Public catalogs | `GET /v1/public/{integrations,skills}/catalog`, `GET /v1/public/billing/plans`, `GET /v1/scopes` | Integration types, skills, plans and limits, scopes |
 
 ## The Four-Step Loop
 
@@ -34,11 +34,10 @@ Every primitive belongs to one step. Docs pages mirror this: `/context`, `/detec
 | Workspace | The tenancy unit; everything below is workspace-scoped |
 | Context graph | Nodes (resources) + typed edges (`deploys_to`, `connects_to`, `invokes`, …), populated by cloud syncs and integrations |
 | Issue | One detection record (Polylane check or provider alert); deduped by fingerprint — a match within 24 h **reopens** rather than duplicates; triage verdict is Incident / No incident |
-| Thread | Persistent agent-run transcript; every automation run and investigation is one |
+| Thread | Persistent agent-run transcript; every investigation and chat is one |
 | Investigation | Agent work on a confirmed issue; parallel hypothesis sub-agents vote confirmed / refuted / inconclusive |
-| Automation | Unattended run: trigger → instructions → tools → actions → destinations (see the `polylane-automations` skill) |
 | Autofix | Agent-written fix that always lands as a pull request, never a direct push |
-| Skill | Reusable instruction set attachable to threads and automations |
+| Skill | Reusable instruction set attachable to threads |
 | Memory | Saved confirmed finding, resurfaced in future agent runs |
 
 ## Connecting a Stack
@@ -80,7 +79,7 @@ Before editing or shipping code that touches a live system, use the graph to see
 2. **Blast radius** — `service graph <id> --direction inbound`: everything that depends on what you're changing.
 3. **Is it already degraded?** — `issue list --active` filtered to the service. Ship nothing into an open incident.
 4. **What else is in flight?** — `feed list --category change|release --since 24h`; avoid stacking changes on an unsettled deploy.
-5. **Ship with a watch** — Polylane's PR review comments production impact on the PR automatically (it walks `deploys_to` edges); `babysit-<provider>-deployment` and `auto-rollback-<provider>-deployment` automation templates cover the deploy window.
+5. **Ship with a watch** — Polylane's PR review comments production impact on the PR automatically (it walks `deploys_to` edges).
 6. **Confirm after deploy** — `service logs` / `service metrics --since <deploy>` against the pre-change baseline, and check the deploy's change record in the feed.
 
 ## Interfaces
@@ -123,7 +122,7 @@ async () => {
 
 **REST.** List/get/patch/delete take `workspaceId` in the **path** (`/v1/{resource}/{workspaceId}[/{id}]`); create is `POST /v1/{resource}` with `workspaceId` in the **body** — a workspaceId in a POST path 403s. Responses are enveloped (`success`, `result`, `error`); plan-limit rejections are **HTTP 426** naming the exceeded dimension. Single objects carry `_html_url` (console deep link) and `_links` (next-step operations) — follow `_links` instead of guessing paths.
 
-**IDs are prefix-typed** — infer the resource type from the prefix (the CLI's `--context` relies on this): `ws_` workspace, `usr_` user, `thrd_` thread, `iss_` issue, `acc_` cloud account, `int_` integration, `repo_` repository, `mem_` memory, `auto_` automation, `fix_` autofix, `skl_` skill, `ask_` escalation, `scan_` scan report, `art_` artifact, `sk_` API key.
+**IDs are prefix-typed** — infer the resource type from the prefix (the CLI's `--context` relies on this): `ws_` workspace, `usr_` user, `thrd_` thread, `iss_` issue, `acc_` cloud account, `int_` integration, `repo_` repository, `mem_` memory, `fix_` autofix, `skl_` skill, `ask_` escalation, `scan_` scan report, `art_` artifact, `sk_` API key.
 
 **Scopes** are `resource:action` strings (`issues:read`, `agent_tools:write`); enumerate them via `GET /v1/scopes`. `agent_tools:write` is **not** in the CLI's default OAuth scope set — mint an API key carrying it when an agent needs write tools.
 

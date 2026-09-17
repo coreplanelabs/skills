@@ -88,13 +88,12 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 
 ## Commands
 
-Commands are user-invocable slash commands that you explicitly call. They ship in the Claude Code and Cursor plugins; Codex surfaces the same three workflows as starter prompts on the plugin.
+Commands are user-invocable slash commands that you explicitly call. They ship in the Claude Code and Cursor plugins; Codex surfaces the same workflows as starter prompts on the plugin.
 
 | Command | Description |
 |---------|-------------|
-| `/polylane:onboard` | Set up Polylane — account, workspace, integrations, cloud accounts, and starter automations |
+| `/polylane:onboard` | Set up Polylane — account, workspace, integrations, and cloud accounts |
 | `/polylane:investigate` | Investigate a production issue — logs, metrics, dependency graph, code, and recent changes |
-| `/polylane:build-automation` | Author an automation — trigger, instructions, tools, actions, and destinations |
 
 ## Skills
 
@@ -104,7 +103,6 @@ Skills are contextual and auto-loaded based on your conversation. When a request
 |-------|------------|
 | polylane | The platform: connecting a stack, investigating production issues, checking production impact before shipping a change, the context graph, detection, remediation, REST API conventions, and the five-tool platform MCP with backend code execution |
 | polylane-cli | The `polylane` CLI: auth, workspaces, investigating issues, querying services and logs, running agent tools, threads, and scripting patterns for agents |
-| polylane-automations | Authoring automations: the full trigger / action / destination schema, templates, and safe-authoring checklist |
 
 ## MCP Servers
 

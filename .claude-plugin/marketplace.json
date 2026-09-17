@@ -1,7 +1,7 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "polylane",
-  "description": "Polylane plugins for coding agents: production investigation, change impact, and operational automations",
+  "description": "Polylane plugins for coding agents: production investigation and change impact",
   "owner": {
     "name": "Coreplane Labs",
     "email": "support@polylane.com",
@@ -21,7 +21,6 @@
         "observability",
         "incidents",
         "investigations",
-        "automations",
         "sre",
         "devops",
         "context-graph",

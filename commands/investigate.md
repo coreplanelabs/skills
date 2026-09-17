@@ -39,4 +39,4 @@ Use `--output json --quiet --non-interactive` on every command so results are pi
 
 ## Wrap Up
 
-Summarize for the user: root cause (or leading hypothesis), evidence (logs/metrics/changes), what was recorded in Polylane, and the recommended next action (fix, rollback, automation to prevent recurrence — see `/polylane:build-automation`).
+Summarize for the user: root cause (or leading hypothesis), evidence (logs/metrics/changes), what was recorded in Polylane, and the recommended next action (fix or rollback).
