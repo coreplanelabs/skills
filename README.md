@@ -135,6 +135,7 @@ This plugin includes Polylane's remote MCP servers:
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
 - [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
+- [Security policy](SECURITY.md) — report a vulnerability privately through GitHub's advisory form; issues in the Polylane service itself are routed from there too
 
 ## Repository layout
 
