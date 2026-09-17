@@ -68,7 +68,7 @@ npx skills add https://github.com/coreplanelabs/skills
 
 ### polylane setup
 
-If you already have the [Polylane CLI](https://docs.polylane.com/coding-agents/cli), it can wire your coding agents directly — installing the CLI skill and registering the MCP server:
+If you already have the [Polylane CLI](https://docs.polylane.com/tools/cli), it can wire your coding agents directly — installing the CLI skill and registering the MCP server:
 
 ```
 polylane setup --agent claude --agent cursor
@@ -130,11 +130,11 @@ This plugin includes Polylane's remote MCP servers:
 
 ## Resources
 
-- [Plugin docs](https://docs.polylane.com/coding-agents/plugins) — install steps for Claude Code, Cursor, and OpenAI Codex
+- [Plugin docs](https://docs.polylane.com/tools/plugins) — install steps for Claude Code, Cursor, and OpenAI Codex
 - [Polylane Documentation](https://docs.polylane.com) — model-readable; agent index at [`/llms.txt`](https://docs.polylane.com/llms.txt)
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
-- [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
+- [Polylane CLI](https://docs.polylane.com/tools/cli)
 - [Security policy](SECURITY.md) — report a vulnerability privately through GitHub's advisory form; issues in the Polylane service itself are routed from there too
 
 ## Repository layout
