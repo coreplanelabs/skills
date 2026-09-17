@@ -147,7 +147,7 @@ This plugin includes Polylane's remote MCP servers:
 | [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
 | [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
 | [`scripts/validate.sh`](scripts/validate.sh) | The pre-PR check over every manifest and both MCP files |
-| [`assets/`](assets/) | The plugin icon and logo the marketplaces show |
+| [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px), `icon.png` (256px), and the vector `logo.svg`, all from the brand kit's green-on-ink icon tile |
 | [`submission/`](submission/) | Listing copy, reviewer fixtures, test cases and the release checklist for the OpenAI plugin directory |
 
 ## Publishing
