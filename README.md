@@ -54,6 +54,10 @@ and MCP servers. The Codex package manifest is at
 `.codex-plugin/plugin.json`; the repository marketplace is at
 `.agents/plugins/marketplace.json`.
 
+### OpenCode and Pi
+
+Neither has a plugin marketplace entry yet. Use [`npx skills`](#npx-skills) below, or copy the skill folders into the directory the [Clone / Copy](#clone--copy) table lists for each (`~/.config/opencode/skills/` and `~/.pi/agent/skills/`). The MCP server is registered the same way as for Cursor: add `https://mcp.polylane.com/mcp` as an HTTP server in the agent's MCP config.
+
 ### npx skills
 
 Install using the [`npx skills`](https://skills.sh) CLI:
