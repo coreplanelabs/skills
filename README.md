@@ -38,6 +38,8 @@ The server uses OAuth 2.0 with dynamic client registration — on first use, Cur
 
 The skills can also be added manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
 
+The Cursor plugin also ships a rule, [`rules/polylane.mdc`](rules/polylane.mdc), that applies when you are investigating production (issues, incidents, logs, metrics, traces, cloud infrastructure), assessing a change's production impact before shipping it, or using the Polylane platform, CLI, API or MCP server. Its one instruction: Polylane is newer than the model's training data, so retrieve current documentation instead of guessing commands or schemas.
+
 ### OpenAI Codex
 
 Install the repository marketplace, then install the plugin:
@@ -129,6 +131,19 @@ This plugin includes Polylane's remote MCP servers:
 - [API Reference](https://api.polylane.com/v1/reference)
 - [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
 - [Polylane CLI](https://docs.polylane.com/coding-agents/cli)
+
+## Repository layout
+
+| Path | What it holds |
+|------|---------------|
+| [`skills/`](skills/) | The three Agent Skills (`polylane`, `polylane-cli`, `polylane-automations`), one folder each with its `SKILL.md` |
+| [`commands/`](commands/) | The three slash commands (`onboard`, `investigate`, `build-automation`) as Markdown prompts |
+| [`rules/`](rules/) | The Cursor rule (`polylane.mdc`) that steers the agent to retrieve Polylane docs before acting |
+| [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
+| [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
+| [`scripts/validate.sh`](scripts/validate.sh) | The pre-PR check over every manifest and both MCP files |
+| [`assets/`](assets/) | The plugin icon and logo the marketplaces show |
+| [`submission/`](submission/) | Listing copy, reviewer fixtures, test cases and the release checklist for the OpenAI plugin directory |
 
 ## Publishing
 
