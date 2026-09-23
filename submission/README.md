@@ -39,8 +39,8 @@ across logs, metrics, traces, deployments, code, and dependency topology;
 and assess the blast radius of a change before shipping. Polylane is read-only
 by default.
 Provider write tools require additional scope, an explicit session opt-in,
-and safety review. REST operations follow API scopes; mapping updates workspace
-records, and feedback sends a report to the Polylane team.
+and safety review. REST operations follow API scopes, and feedback sends a report
+to the Polylane team.
 
 ## Starter prompts
 
@@ -58,7 +58,8 @@ workspace containing synthetic data only:
 - a dependency path from `checkout-api` through `payments-worker` to the database;
 - a recorded synthetic `checkout-api` deployment followed by an error-rate increase;
 - example logs and metrics covering the same time window;
-- one active issue linked to `checkout-api`;
+- one active issue linked to `checkout-api`, with an investigation thread that
+  holds at least one confirmed and one refuted hypothesis;
 - one repository with a checkout timeout implementation and recent change; and
 - writes disabled on every connected account, so agent tools stay read-only.
 
@@ -120,17 +121,19 @@ correlate it with the linked service, logs, metrics, and recent change records.
 **Expected result:** File references, the relevant behavior in the code, and a
 carefully qualified explanation of the production relationship.
 
-### 5. Map the repository into the workspace
+### 5. Summarize an incident's investigation
 
-**Prompt:** "Map this repository into my Polylane workspace and tell me what it
-found."
+**Prompt:** "Open the active checkout incident in Polylane and summarize its
+investigation so far: what was checked, what was ruled out, and what is still
+open."
 
-**Expected behavior:** Call `startMapping`, work through each phase with
-`advanceMapping`, and read `getMappingStatus` as needed. Submit only aggregate
-findings and file references. Do not call any provider write tool.
+**Expected behavior:** Use `search` to find the issue and thread operations,
+then `execute` to read the issue, its timeline and notes, and the investigation
+thread. Report hypotheses as confirmed, refuted, or inconclusive exactly as
+recorded. Do not call any write operation.
 
-**Expected result:** The workspace URL for the published topology plus a short
-summary of the services, dependencies, and findings that were recorded.
+**Expected result:** The issue id and console link, the affected service, each
+hypothesis with its verdict and evidence, and what remains open.
 
 ## Negative test cases
 

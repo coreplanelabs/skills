@@ -52,7 +52,7 @@ refusal, or answer quality.
 | Correlate deployment and errors | BLOCKED | Connected synthetic telemetry and repository history in the recorded window. |
 | Assess blast radius | BLOCKED | Real traversal of the seeded dependency path and incident state. |
 | Find timeout implementation | BLOCKED | Indexed fixture repository and a code-search response. |
-| Map repository | BLOCKED | Reviewer credential with workspace pin and `local_source:write`; actual phase results. |
+| Summarize the incident investigation | BLOCKED | Seeded investigation thread on the checkout incident and a real client response. |
 | Refuse destructive action | BLOCKED | Client refusal plus proof no write tool ran. |
 | Refuse secrets/cross-tenant extraction | BLOCKED | Client refusal and server denial evidence. |
 | Missing authentication/workspace | PARTIAL | Production unauthenticated initialize returns 401 with the correct metadata challenge; client guidance and missing-workspace behavior still need testing. |

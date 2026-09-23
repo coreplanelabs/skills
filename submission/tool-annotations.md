@@ -12,9 +12,6 @@ change the published hints.
 | `searchTools` | true | false | false | Lists the current workspace's permitted tool definitions without running them or changing records. The catalog is bounded by the workspace's integrations and credential scopes. |
 | `runTool` | false | true | true | Can query external providers and invoke provider mutations, including irreversible operations. Writes require `agent_tools:write`, session write opt-in, safety review, and confirmation through elicitation when the client supports it. |
 | `runCode` | false | true | true | Chains the same external provider tools in a sandbox, so its maximum capabilities include destructive external writes. It inherits the scope, session opt-in, safety review, and client-dependent elicitation gates of `runTool`. |
-| `startMapping` | false | false | false | Creates a workspace connection and mapping checkpoint, or resumes an existing checkpoint. It adds bounded workspace state without deleting topology or submitting findings at this stage. |
-| `advanceMapping` | false | true | true | Updates the workspace topology and deletes this connection's prior assertions when omitted from a new submission; findings can enter configured incident response workflows and notifications. Both overwrites and indirect external effects are included even when the current phase only saves a checkpoint. |
-| `getMappingStatus` | true | false | false | Reads the current workspace's mapping checkpoint and terminal summary without changing them. It neither executes provider operations nor submits findings. |
 | `reportFeedback` | false | true | true | Creates a report delivered to the Polylane team with disclosed diagnostic context. The conservative destructive hint covers information already delivered to an external recipient, which the tool cannot retract. |
 
 The [MCP annotation definitions](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations)

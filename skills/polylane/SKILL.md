@@ -55,7 +55,7 @@ How things connect (per-provider flags: `polylane integration connect --help` / 
 - **Most observability tools and clouds** — an API token.
 - **Any MCP server** — connectable as an integration; its tools become available to agents.
 
-**Verify, don't assume:** `integration list`, `cloud list`, then `service list` — resources appearing means the first sync worked (it also produces a "discovery" change record). For fully agent-driven onboarding from nothing (account → workspace → API key → MCP → clouds), fetch and follow <https://api.polylane.com/v1/public/setup/prompt.md>.
+**Verify, don't assume:** `integration list`, `cloud list`, then `service list` — resources appearing means the first sync worked (it also produces a "discovery" change record). For fully agent-driven onboarding from nothing (account → workspace → API key → MCP → clouds), follow <https://polylane.com/for-agents>.
 
 ## Investigating with Polylane
 
@@ -89,13 +89,13 @@ Before editing or shipping code that touches a live system, use the graph to see
 ├─ Coding agent → platform MCP or CLI; wire both with `polylane setup`
 ├─ Programmatic → REST API (api.polylane.com/v1)
 ├─ No account yet → `polylane auth signup`, or hand any coding agent
-│  https://api.polylane.com/v1/public/setup/prompt.md to onboard from scratch
+│  https://polylane.com/for-agents to onboard from scratch
 └─ Humans → console.polylane.com (every API object carries a _html_url deep link)
 ```
 
-## The Platform MCP: Five Tools, Everything Reachable
+## The Platform MCP: Six Tools, Everything Reachable
 
-`https://mcp.polylane.com/mcp` (streamable HTTP; OAuth with dynamic client registration, or `x-api-key` for headless). It exposes exactly **five tools** no matter how much is connected — instead of one MCP tool per capability, it **executes your code on the Polylane backend**, where the full surface is bound:
+`https://mcp.polylane.com/mcp` (streamable HTTP; OAuth with dynamic client registration, or `x-api-key` for headless). It exposes a fixed **six-tool** surface no matter how much is connected (the five below, plus `reportFeedback` for reporting friction with the server) — instead of one MCP tool per capability, it **executes your code on the Polylane backend**, where the full surface is bound:
 
 | Tool | What it does |
 |------|-------------|
