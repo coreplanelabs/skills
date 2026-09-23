@@ -101,7 +101,7 @@ Skills are contextual and auto-loaded based on your conversation. When a request
 
 | Skill | Useful for |
 |-------|------------|
-| polylane | The platform: connecting a stack, investigating production issues, checking production impact before shipping a change, the context graph, detection, remediation, REST API conventions, and the five-tool platform MCP with backend code execution |
+| polylane | The platform: connecting a stack, investigating production issues, checking production impact before shipping a change, the context graph, detection, remediation, REST API conventions, and the platform MCP with backend code execution |
 | polylane-cli | The `polylane` CLI: auth, workspaces, investigating issues, querying services and logs, running agent tools, threads, and scripting patterns for agents |
 
 ## MCP Servers
@@ -118,20 +118,18 @@ This plugin includes Polylane's remote MCP servers:
 | Tool | What it does |
 | --- | --- |
 | `search` | Find Polylane REST API operations and their schemas: tracked issues, investigation threads, context graph resources. |
-| `execute` | Call the Polylane REST API: read tracked issues, investigation threads, and context graph resources. |
+| `execute` | Call the Polylane REST API with the credential’s scopes, including record changes and external actions when authorized. |
 | `searchTools` | List the workspace's agent tools with their input schemas: live logs, metrics, traces, deployments, and the context graph. |
 | `runTool` | Run an agent tool to read live production state. Read-only by default; writes require write access and a session opt-in. |
 | `runCode` | Chain several agent tools in one TypeScript call for multi-step production investigations. |
-| `startMapping` | Start or resume mapping the current repository into the workspace topology. |
-| `advanceMapping` | Submit a mapping phase's results and receive the next directive; the final submission publishes the topology. |
-| `getMappingStatus` | Read the mapping session's phase, next directive, and terminal payload. Read-only. |
+| `reportFeedback` | Report MCP friction to the Polylane team with diagnostic context. |
 
 ## Resources
 
 - [Plugin docs](https://docs.polylane.com/tools/plugins) — install steps for Claude Code, Cursor, and OpenAI Codex
 - [Polylane Documentation](https://docs.polylane.com) — model-readable; agent index at [`/llms.txt`](https://docs.polylane.com/llms.txt)
 - [API Reference](https://api.polylane.com/v1/reference)
-- [Agent setup prompt](https://api.polylane.com/v1/public/setup/prompt.md) — hand this to any coding agent to onboard from scratch
+- [Polylane for coding agents](https://polylane.com/for-agents) — hand this page to any coding agent to onboard from scratch
 - [Polylane CLI](https://docs.polylane.com/tools/cli)
 - [Security policy](SECURITY.md) — report a vulnerability privately through GitHub's advisory form; issues in the Polylane service itself are routed from there too
 

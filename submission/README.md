@@ -38,8 +38,9 @@ observability, source-control, and collaboration systems; investigate incidents
 across logs, metrics, traces, deployments, code, and dependency topology;
 and assess the blast radius of a change before shipping. Polylane is read-only
 by default.
-Write-capable operations require additional scope, an explicit session opt-in,
-and safety review.
+Provider write tools require additional scope, an explicit session opt-in,
+and safety review. REST operations follow API scopes, and feedback sends a report
+to the Polylane team.
 
 ## Starter prompts
 
@@ -55,11 +56,16 @@ workspace containing synthetic data only:
 
 - services named `checkout-api`, `payments-worker`, and `postgres-primary`;
 - a dependency path from `checkout-api` through `payments-worker` to the database;
-- a recent `checkout-api` deployment followed by a synthetic error-rate increase;
+- a recorded synthetic `checkout-api` deployment followed by an error-rate increase;
 - example logs and metrics covering the same time window;
-- one active issue linked to `checkout-api`;
+- one active issue linked to `checkout-api`, with an investigation thread that
+  holds at least one confirmed and one refuted hypothesis;
 - one repository with a checkout timeout implementation and recent change; and
 - writes disabled on every connected account, so agent tools stay read-only.
+
+Use the fixture tooling and reset sequence in `apps/apis/api-mcp/REVIEWER.md`
+in `coreplanelabs/nominal`. Keep the fixture time window explicit, so a reviewer
+running days later queries the same evidence instead of an empty last-hour window.
 
 Record the account, workspace slug, expected fixture timestamps, and any reset
 procedure in the portal's private reviewer notes. Never commit reviewer
@@ -81,7 +87,7 @@ evidence, and console links when returned by Polylane.
 
 ### 2. Correlate an error spike with a deployment
 
-**Prompt:** "Investigate the checkout errors from the last hour and determine
+**Prompt:** "Investigate the checkout errors in the fixture time window and determine
 whether a deployment caused them."
 
 **Expected behavior:** Locate `checkout-api`, inspect logs and metrics, retrieve
@@ -115,17 +121,19 @@ correlate it with the linked service, logs, metrics, and recent change records.
 **Expected result:** File references, the relevant behavior in the code, and a
 carefully qualified explanation of the production relationship.
 
-### 5. Map the repository into the workspace
+### 5. Summarize an incident's investigation
 
-**Prompt:** "Map this repository into my Polylane workspace and tell me what it
-found."
+**Prompt:** "Open the active checkout incident in Polylane and summarize its
+investigation so far: what was checked, what was ruled out, and what is still
+open."
 
-**Expected behavior:** Call `startMapping`, work through each phase with
-`advanceMapping`, and read `getMappingStatus` as needed. Submit only aggregate
-findings and file references. Do not call any provider write tool.
+**Expected behavior:** Use `search` to find the issue and thread operations,
+then `execute` to read the issue, its timeline and notes, and the investigation
+thread. Report hypotheses as confirmed, refuted, or inconclusive exactly as
+recorded. Do not call any write operation.
 
-**Expected result:** The workspace URL for the published topology plus a short
-summary of the services, dependencies, and findings that were recorded.
+**Expected result:** The issue id and console link, the affected service, each
+hypothesis with its verdict and evidence, and what remains open.
 
 ## Negative test cases
 
@@ -161,6 +169,10 @@ investigation, production-impact analysis, CLI workflows, and onboarding.
 
 ## Pre-submission checklist
 
+Unchecked items are release gates, not evidence of completed work. See the
+[review readiness notes](review-readiness.md) for the current limits and human steps.
+
+
 Repository/package:
 
 - [ ] `.codex-plugin/plugin.json` passes the plugin validator.
@@ -172,15 +184,18 @@ Repository/package:
 OpenAI organization:
 
 - [ ] The submitter has Apps Management write access.
-- [ ] The exact developer name matches the verified business identity.
+- [ ] The verified business identity is exactly **Coreplane Labs**.
+- [ ] Use a project with global data residency, as required by the [review requirements](https://developers.openai.com/plugins/deploy/app-review); EU-residency projects cannot submit MCP plugins.
 - [ ] Country and region availability has been approved internally.
 
 MCP server and authentication:
 
 - [ ] `https://mcp.polylane.com/mcp` is stable and publicly reachable.
-- [ ] OAuth requests `openid` and `email` and UserInfo returns `email` plus `email_verified: true`.
+- [ ] OAuth code flow, S256 PKCE, resource binding, issuer identification, and refresh pass on UAT.
+- [ ] Decide whether Enterprise workspace-domain restrictions are supported. OIDC discovery, `openid`/`email`, and verified-email UserInfo are required for that optional protection, not basic OAuth submission. See [auth guidance](https://developers.openai.com/plugins/build/auth).
 - [ ] The portal's exact token is served alone from `https://mcp.polylane.com/.well-known/openai-apps-challenge`.
-- [ ] Every tool name, description, input schema, output shape, and safety annotation has been reviewed.
+- [ ] Every tool name, title, description, input schema, output shape, and safety annotation has been reviewed.
+- [ ] Paste the [per-tool justifications](tool-annotations.md), and verify their values match the deployed scan.
 - [ ] `openWorldHint` is re-audited for tools that can create PRs, send messages, trigger deploys, or otherwise affect external systems.
 - [ ] Tool responses exclude secrets, unnecessary personal data, debug payloads, and undisclosed internal identifiers.
 - [ ] Reviewer credentials complete every test without MFA, email confirmation, SMS, or private-network access.
@@ -191,6 +206,7 @@ Portal:
 - [ ] Complete domain verification and OAuth configuration.
 - [ ] Run **Scan Tools**, resolve every validation result, and scan again after changes.
 - [ ] Upload the final two-skill bundle to the same draft.
-- [ ] Add the starter prompts and all five positive and three negative tests.
+- [ ] Add the starter prompts and exactly five positive and three negative tests, with actual outcomes recorded.
+- [ ] Provide a demo-recording URL covering the supported ChatGPT and Codex flows.
 - [ ] Add release notes, availability, and policy attestations.
 - [ ] Submit for review; after approval, explicitly publish the approved version.
