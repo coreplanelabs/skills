@@ -76,7 +76,7 @@ credentials to this repository.
 Upload [`chatgpt-app-submission.json`](../chatgpt-app-submission.json) after the
 [companion MCP metadata change](https://github.com/coreplanelabs/nominal/pull/3776)
 is deployed and Scan Tools matches its hints. The import suggests Polylane,
-“Investigate production issues”, Developer Tools, and the description below.
+“Investigate production issues”, Developer Tools, and a workflow description.
 It covers the product MCP endpoint; the documentation MCP is not submitted.
 Expected outcomes are reviewer test plans, not recorded passes.
 
