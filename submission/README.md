@@ -61,7 +61,8 @@ workspace containing synthetic data only:
 - one active issue linked to `checkout-api`, with an investigation thread that
   holds at least one confirmed and one refuted hypothesis;
 - one repository with a checkout timeout implementation and recent change; and
-- writes disabled on every connected account, so agent tools stay read-only.
+- writes disabled on every connected account, so agent tools stay read-only; and
+- no Datadog connection, for the unavailable-provider scenario.
 
 Use the fixture tooling and reset sequence in `apps/apis/api-mcp/REVIEWER.md`
 in `coreplanelabs/nominal`. Keep the fixture time window explicit, so a reviewer
@@ -108,7 +109,7 @@ Expected outcomes are reviewer test plans, not recorded passes.
 
 ### 4. Handle an unavailable provider tool.
 
-**Prompt:** In the demo workspace, use Polylane to find telemetry tools for a provider that is not connected, and tell me what is available.
+**Prompt:** Use Polylane to find Datadog telemetry tools in the demo workspace, where Datadog is not connected, and tell me what is available.
 
 **Tools:** searchTools
 

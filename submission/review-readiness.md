@@ -88,9 +88,9 @@ refusal, or answer quality.
 The [submission error reference](https://developers.openai.com/plugins/deploy/submission-errors)
 is stricter than the narrative guide on test count: use exactly five positive
 and three negative scenarios. It also requires a demo-recording URL and a
-current production tool scan. The MCP advertises an inline result viewer, so treat it as a UI submission;
-optional screenshots should show the actual verified viewer.
-
+current production tool scan. The MCP advertises an inline result viewer, so
+treat it as a UI submission; optional screenshots should show the actual
+verified viewer.
 
 ## Result viewer and CSP
 

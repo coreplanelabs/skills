@@ -108,7 +108,7 @@
     },
     {
       "description": "Handle an unavailable provider tool.",
-      "user_prompt": "In the demo workspace, use Polylane to find telemetry tools for a provider that is not connected, and tell me what is available.",
+      "user_prompt": "Use Polylane to find Datadog telemetry tools in the demo workspace, where Datadog is not connected, and tell me what is available.",
       "file_attachment_urls": null,
       "tools_triggered": "searchTools",
       "expected_output": "Reports the actual available catalog or lack of matching tools, explains the missing connection when known, and does not invent telemetry or connect a provider.",
