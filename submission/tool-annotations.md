@@ -7,12 +7,12 @@ change the published hints.
 
 | Tool | readOnlyHint | destructiveHint | openWorldHint | Reviewer justification |
 | --- | --- | --- | --- | --- |
-| `search` | true | false | false | Searches Polylane's API schema without changing records or invoking the discovered operations. Its domain is the bounded Polylane API specification. |
+| `search` | false | false | false | Searches the bounded Polylane API specification, populates schema caches, and records execution telemetry without invoking discovered operations. |
 | `execute` | false | true | true | A sufficiently scoped credential can create, overwrite, or delete Polylane records and trigger external actions such as GitHub autofix pull requests. API authorization limits each request, but the static annotations cover those write-capable operations. |
-| `searchTools` | true | false | false | Lists the current workspace's permitted tool definitions without running them or changing records. The catalog is bounded by the workspace's integrations and credential scopes. |
+| `searchTools` | false | false | false | Lists the bounded workspace tool catalog and records execution telemetry without running the listed tools. |
 | `runTool` | false | true | true | Can query external providers and invoke provider mutations, including irreversible operations. Writes require `agent_tools:write`, session write opt-in, safety review, and confirmation through elicitation when the client supports it. |
 | `runCode` | false | true | true | Chains the same external provider tools in a sandbox, so its maximum capabilities include destructive external writes. It inherits the scope, session opt-in, safety review, and client-dependent elicitation gates of `runTool`. |
-| `reportFeedback` | false | true | true | Creates a report delivered to the Polylane team with disclosed diagnostic context. The conservative destructive hint covers information already delivered to an external recipient, which the tool cannot retract. |
+| `reportFeedback` | false | true | false | Creates and delivers workspace-associated feedback with disclosed diagnostic context to the fixed Polylane support team; callers cannot select arbitrary recipients, and delivered information cannot be retracted. |
 
 The [MCP annotation definitions](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations)
 and [OpenAI review guidance](https://developers.openai.com/plugins/deploy/app-review)
@@ -22,3 +22,8 @@ we apply the conservative OpenAI reading and mark it destructive. An external
 service's private workspace alone does not make a tool open-world: the provider
 execution tools receive that hint because their full supported operations reach
 external entities, not merely because their servers are hosted elsewhere.
+
+Discovery tools use the submission convention that counts telemetry and cache
+writes as state changes. A false read-only hint does not grant permission to
+modify customer records. Feedback requires an OAuth or broker-authenticated
+user session; API-key sessions cannot submit it.

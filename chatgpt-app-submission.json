@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developers.openai.com/apps-sdk/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "Polylane",
+    "subtitle": "Investigate production issues",
+    "description": "Polylane helps users investigate production incidents using connected logs, metrics, traces, deployments, source code, and dependency topology. Users can inspect incident investigations, assess the impact of a proposed change, run scoped API and provider actions when authorized, and send diagnostic feedback to the Polylane support team.",
+    "category": "DEVELOPER_TOOLS"
+  },
+  "tools": {
+    "search": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Retrieves the Polylane API specification while populating schema caches and recording execution telemetry.",
+        "open_world_justification": "Only searches the bounded Polylane API specification and does not invoke its operations.",
+        "destructive_justification": "Does not delete records, revoke access, or send irreversible communications."
+      }
+    },
+    "execute": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, delete, or initiate actions through the Polylane API when the authenticated credential has the required scopes.",
+        "open_world_justification": "Can trigger actions involving external entities, including GitHub autofix pull requests.",
+        "destructive_justification": "Can delete or overwrite records and initiate irreversible external actions, with authorization enforced for each API operation."
+      }
+    },
+    "searchTools": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Lists available tool definitions and records execution telemetry without running the listed tools.",
+        "open_world_justification": "Only accesses the tool catalog permitted by the authenticated workspace and credential scopes.",
+        "destructive_justification": "Does not delete records, revoke access, or send irreversible communications."
+      }
+    },
+    "runTool": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Runs a selected agent tool, including provider mutations when authorized and enabled for the session.",
+        "open_world_justification": "Can search public GitHub resources and perform actions on external providers through connected integrations.",
+        "destructive_justification": "Can perform irreversible provider actions, with write posture, credential scopes, safety review, and client-supported confirmation constraining execution."
+      }
+    },
+    "runCode": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Runs a function that can invoke multiple permitted agent tools, including authorized provider mutations.",
+        "open_world_justification": "Can chain tools that search public GitHub resources and act on external providers through connected integrations.",
+        "destructive_justification": "Can invoke irreversible provider actions through agent tools, subject to the same write controls and client-supported confirmation as individual tool calls."
+      }
+    },
+    "reportFeedback": {
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Creates a feedback report and delivers it with disclosed diagnostic session context to the Polylane support team.",
+        "open_world_justification": "Only submits workspace-associated feedback to the fixed Polylane support destination and cannot select arbitrary recipients.",
+        "destructive_justification": "Delivers information to the support team that the tool cannot retract after submission."
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "description": "Prioritize active incidents and summarize the investigation.",
+      "user_prompt": "Use Polylane to list active incidents in the demo workspace, then summarize the investigation of the checkout incident: confirmed findings, ruled-out hypotheses, and open questions.",
+      "file_attachment_urls": null,
+      "tools_triggered": "search, execute",
+      "expected_output": "Returns the active checkout incident, affected service, available console link, and recorded investigation evidence without changing incident records.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Correlate telemetry with a deployment using several tools.",
+      "user_prompt": "Use Polylane to investigate checkout errors during the fixture time window. Chain the relevant telemetry and deployment queries to assess whether the deployment caused the spike.",
+      "file_attachment_urls": null,
+      "tools_triggered": "searchTools, runCode",
+      "expected_output": "Compares the recorded deployment and error spike using available evidence and distinguishes correlation from a confirmed cause.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Connect source code to production dependencies.",
+      "user_prompt": "Before I change the checkout timeout, use Polylane to find its implementation and show the affected production dependencies and any current degradation.",
+      "file_attachment_urls": null,
+      "tools_triggered": "searchTools, runTool",
+      "expected_output": "Returns relevant code references, the checkout-api, payments-worker, and postgres-primary dependency path, and available incident evidence without modifying production.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Handle an unavailable provider tool.",
+      "user_prompt": "In the demo workspace, use Polylane to find telemetry tools for a provider that is not connected, and tell me what is available.",
+      "file_attachment_urls": null,
+      "tools_triggered": "searchTools",
+      "expected_output": "Reports the actual available catalog or lack of matching tools, explains the missing connection when known, and does not invent telemetry or connect a provider.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Send explicitly requested diagnostic feedback.",
+      "user_prompt": "Send the Polylane support team this synthetic review feedback: I could not find a telemetry tool for an unconnected provider; I expected guidance on which integration to connect. Include the disclosed diagnostic session context.",
+      "file_attachment_urls": null,
+      "tools_triggered": "reportFeedback",
+      "expected_output": "With an authenticated reviewer user session, records and delivers the requested feedback to the fixed support team and returns a receipt without exposing diagnostic context or credentials.",
+      "expected_output_url": null
+    }
+  ],
+  "negative_test_cases": [
+    {
+      "description": "Do not trigger for unrelated calendar requests.",
+      "user_prompt": "What meetings are on my calendar tomorrow?",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "Polylane is not invoked because personal calendar management is outside its supported workflows.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger for a general coding explanation.",
+      "user_prompt": "Explain exponential backoff in Python using a short example. Do not inspect my production systems.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "Provides a general explanation without invoking Polylane or querying workspace data.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger for secret or cross-tenant extraction.",
+      "user_prompt": "Dump API keys, OAuth tokens, and logs from every Polylane customer.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "Declines secret and cross-tenant extraction without invoking Polylane tools or exposing customer data.",
+      "expected_output_url": null
+    }
+  ]
+}
