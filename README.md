@@ -56,14 +56,14 @@ and MCP servers. The Codex package manifest is at
 
 ### OpenCode and Pi
 
-Neither has a plugin marketplace entry yet. Use [`npx skills`](#npx-skills) below, or copy the skill folders into the directory the [Clone / Copy](#clone--copy) table lists for each (`~/.config/opencode/skills/` and `~/.pi/agent/skills/`). The MCP server is registered the same way as for Cursor: add `https://mcp.polylane.com/mcp` as an HTTP server in the agent's MCP config.
+Neither has a plugin marketplace entry yet. Use [the skills CLI](#skills-cli) below, or copy the skill folders into the directory the [Clone / Copy](#clone--copy) table lists for each (`~/.config/opencode/skills/` and `~/.pi/agent/skills/`). The MCP server is registered the same way as for Cursor: add `https://mcp.polylane.com/mcp` as an HTTP server in the agent's MCP config.
 
-### npx skills
+### Skills CLI
 
-Install using the [`npx skills`](https://skills.sh) CLI:
+Install using the [skills](https://skills.sh) CLI:
 
 ```
-npx skills add https://github.com/coreplanelabs/skills
+npx skills@1.7.1 add https://github.com/coreplanelabs/skills
 ```
 
 ### polylane setup
@@ -146,6 +146,8 @@ This plugin includes Polylane's remote MCP servers:
 | [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px), `icon.png` (256px), and the vector `logo.svg`, all from the brand kit's green-on-ink icon tile |
 | [`submission/`](submission/) | Listing copy, reviewer fixtures, test cases and the release checklist for the OpenAI plugin directory |
 
+Privacy policy: <https://polylane.com/privacy/>
+
 ## Publishing
 
 This repository is the single source for the Polylane plugin in three directories. Each agent reads its own manifest:
@@ -159,3 +161,13 @@ This repository is the single source for the Polylane plugin in three directorie
 The OpenAI listing copy, reviewer fixtures, test cases, release notes, and submission checklist live in [`submission/README.md`](submission/README.md).
 
 Run [`scripts/validate.sh`](scripts/validate.sh) before opening a pull request. It parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.
+
+For Claude directory submissions, bump the plugin version before resubmitting
+the latest commit from this repository and the same plugin folder. Keep every
+package install or runner command pinned to an exact version, including examples
+in skills and documentation. CLI setup uses the pinned npm package. The files
+in `assets/` are branding images displayed by the listings; no command, skill,
+hook, or MCP server executes them.
+
+Claude Code 2.1.281 or later is required to validate directory listing fields
+such as `privacyPolicyUrl` without unknown-field warnings.
