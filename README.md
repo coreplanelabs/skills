@@ -137,14 +137,13 @@ This plugin includes Polylane's remote MCP servers:
 
 | Path | What it holds |
 |------|---------------|
-| [`skills/`](skills/) | The three Agent Skills (`polylane`, `polylane-cli`, `polylane-automations`), one folder each with its `SKILL.md` |
-| [`commands/`](commands/) | The three slash commands (`onboard`, `investigate`, `build-automation`) as Markdown prompts |
+| [`skills/`](skills/) | The two Agent Skills (`polylane`, `polylane-cli`), one folder each with its `SKILL.md` |
+| [`commands/`](commands/) | The two slash commands (`onboard`, `investigate`) as Markdown prompts |
 | [`rules/`](rules/) | The Cursor rule (`polylane.mdc`) that steers the agent to retrieve Polylane docs before acting |
 | [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
 | [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
 | [`scripts/validate.sh`](scripts/validate.sh) | The pre-PR check over every manifest and both MCP files |
 | [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px), `icon.png` (256px), and the vector `logo.svg`, all from the brand kit's green-on-ink icon tile |
-| [`submission/`](submission/) | Listing copy, reviewer fixtures, test cases and the release checklist for the OpenAI plugin directory |
 
 Privacy policy: <https://polylane.com/privacy/>
 
@@ -157,8 +156,6 @@ This repository is the single source for the Polylane plugin in three directorie
 | Claude Code | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) + [`marketplace.json`](.claude-plugin/marketplace.json) | Claude plugin directory |
 | Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | Cursor Marketplace |
 | OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
-
-The OpenAI listing copy, reviewer fixtures, test cases, release notes, and submission checklist live in [`submission/README.md`](submission/README.md).
 
 Run [`scripts/validate.sh`](scripts/validate.sh) before opening a pull request. It parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.
 

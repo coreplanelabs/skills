@@ -1,7 +1,7 @@
 {
   "name": "polylane",
   "displayName": "Polylane",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "minClientVersions": {
     "cursor": "3.13.0"
   },
@@ -10,7 +10,7 @@
     "name": "Coreplane Labs",
     "email": "support@polylane.com"
   },
-  "homepage": "https://docs.polylane.com/coding-agents/plugins",
+  "homepage": "https://docs.polylane.com/tools/plugins",
   "repository": "https://github.com/coreplanelabs/skills",
   "license": "MIT",
   "logo": "assets/logo.png",

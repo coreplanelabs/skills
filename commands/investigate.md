@@ -16,13 +16,13 @@ When this command is invoked:
 
 1. Load the `polylane-cli` skill bundled with this plugin for CLI usage, agent flags, contracts, and gotchas
 2. For exact flags on any command, run `polylane <resource> <verb> --help` — it is authoritative
-3. If deeper platform concepts are needed, fetch https://docs.polylane.com/raw/investigation.md
+3. If deeper platform concepts are needed, fetch https://docs.polylane.com/raw/investigate.md
 
 ## Preconditions
 
 ```bash
-polylane auth status || polylane auth login
-polylane workspace list                      # confirm a workspace is set
+polylane auth whoami >/dev/null || polylane auth login   # auth status exits 0 even when signed out
+polylane auth status                         # confirm workspaceId is set; else polylane workspace list + workspace use <id>
 ```
 
 Use `--output json --quiet --non-interactive` on every command so results are pipeable and nothing blocks on a prompt.
@@ -35,7 +35,7 @@ Use `--output json --quiet --non-interactive` on every command so results are pi
 4. **Correlate with code.** `polylane repo find "<area>"`, then `polylane repo grep <repo-id> "<pattern>"` and `polylane repo read <repo-id> <path>` to inspect the suspect code path.
 5. **Go deeper with agent tools when the fixed commands aren't enough.** `polylane tools search "<capability>"`, then `polylane tools run <name> --params '{...}'` or chain several with `polylane tools code`.
 6. **Record as you go.** `polylane issue note <id> "<what you did>"`, `polylane issue milestone <id> "Mitigated"` at state changes, and `polylane memory save "<confirmed finding>"` for anything future investigations should know.
-7. **Escalate to the Polylane agent when useful.** `polylane thread ask "<focused question>" --context <ids>` — attach the relevant service/repo/issue ids so the agent starts with your context.
+7. **Escalate to the Polylane agent when useful.** `polylane thread ask "<focused question>" --context <ids>` — attach the relevant service/repo/cloud account ids so the agent starts with your context (issue ids are not a context type; name the issue in the prompt).
 
 ## Wrap Up
 
