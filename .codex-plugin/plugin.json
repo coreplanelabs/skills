@@ -1,13 +1,13 @@
 {
   "name": "polylane",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Investigate production and assess change impact with Polylane.",
   "author": {
     "name": "Coreplane Labs",
     "email": "support@polylane.com",
     "url": "https://polylane.com"
   },
-  "homepage": "https://docs.polylane.com/coding-agents/plugins",
+  "homepage": "https://docs.polylane.com/tools/plugins",
   "repository": "https://github.com/coreplanelabs/skills",
   "keywords": [
     "polylane",
@@ -30,6 +30,7 @@
       "Write"
     ],
     "websiteURL": "https://polylane.com",
+    "supportURL": "https://polylane.com/developers/#support",
     "privacyPolicyURL": "https://polylane.com/privacy/",
     "termsOfServiceURL": "https://polylane.com/terms/",
     "defaultPrompt": [

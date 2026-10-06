@@ -35,7 +35,8 @@ npm install -g @coreplane/polylane@0.2.48
 polylane auth login                                    # OAuth browser (PKCE)
 polylane auth login --no-browser                       # device code (SSH / headless)
 polylane auth login --api-key sk_xxxxx                 # scripts / CI
-polylane auth signup --email <email> --password <pw>   # new account (emails a 6-digit code)
+polylane auth signup --email <email> [--password <pw>] # new account (emails a 6-digit code); omit --password to get a generated one, shown once
+polylane auth signup --email <email> --code <code>     # finish verification non-interactively
 polylane auth status                                   # verify
 
 # Workspace — set once, then forget
@@ -43,9 +44,9 @@ polylane workspace use <workspace-id-or-slug>
 polylane workspace create --name "My Workspace"        # new + makes default
 ```
 
-API keys persist to `~/.polylane/config.json`; OAuth credentials to `~/.polylane/credentials.json` (auto-refresh). For long-lived agent access after signup, create an API key and switch to it. Account lifecycle beyond signup/login lives in the web console.
+API keys persist to `~/.polylane/config.json`; OAuth and signup session tokens to `~/.polylane/credentials.json` (auto-refresh). For long-lived agent access after signup, create an API key and switch to it with `polylane auth logout --yes && polylane auth login --api-key <key>`: the global `--api-key` flag and `POLYLANE_API_KEY` outrank stored session tokens, but the config-file key saved by `auth login --api-key` does not. Account lifecycle beyond signup/login lives in the web console.
 
-Config precedence: **flags > env vars (`POLYLANE_API_KEY`, `POLYLANE_WORKSPACE_ID`, `POLYLANE_OUTPUT`, …) > `~/.polylane/config.json` > defaults**. Full variable list: <https://docs.polylane.com/coding-agents/cli/configuration>. Telemetry: `polylane telemetry status` / `disable`, or `DO_NOT_TRACK=1`.
+Config precedence: **flags > env vars (`POLYLANE_API_KEY`, `POLYLANE_WORKSPACE_ID`, `POLYLANE_OUTPUT`, …) > `~/.polylane/config.json` > defaults**. Full variable list: <https://docs.polylane.com/tools/cli/configuration>. Telemetry: `polylane telemetry status` / `disable`, or `DO_NOT_TRACK=1`.
 
 ## Agent Flags
 
@@ -55,20 +56,20 @@ Combine for non-interactive (agent / CI) contexts:
 |---|---|
 | `--non-interactive` | Fail fast on missing args instead of prompting |
 | `--quiet` | Suppress spinners — stdout stays pure data |
-| `--output json` | Force JSON regardless of TTY state |
+| `--output json` | Force JSON regardless of TTY state (JSON is already the default when stdout is piped) |
 | `--full` | Disable narrow projection on list commands |
-| `--no-wait` / `--stream` | Fire-and-forget / stream tokens on `thread ask` / `continue` |
+| `--no-wait` | Fire-and-forget on `thread ask` / `continue` |
 | `--yes` | Skip destructive-action confirmation prompts |
 | `--dry-run` / `--verbose` | Preview the request / log HTTP traffic |
 | `--api-key` / `--workspace` / `--timeout` | Per-call overrides |
 
 ## Contracts
 
-**stdout is pure data** (JSON, table rows, streamed tokens, URLs — safe to pipe); **stderr** carries progress, hints, and errors. Errors print `Error: <message>` + `Hint: <the exact command that fixes it>`; in JSON mode: `{"error": {"code", "message", "hint"}}` on stderr.
+**stdout is pure data** (JSON, table rows, streamed tokens, URLs — safe to pipe); **stderr** carries progress, hints, and errors. Errors print `Error: <message>` + `Hint: <how to fix it, often the exact command>`; in JSON mode: `{"error": {"code", "message", "hint"}}` on stderr, where `code` is the exit code and `hint` is omitted when there is none.
 
-**Exit codes** (stable — branch on `$?`): 0 success · 1 general · 2 usage · 3 auth · 4 rate limit / plan upgrade · 5 timeout · 6 network · 130 interrupted.
+**Exit codes** (stable — branch on `$?`): 0 success · 1 general · 2 usage · 3 auth · 4 rate limit / plan limit · 5 timeout · 6 network · 7 pending (AWS stack still creating, or a plan upgrade still finishing) · 130 interrupted.
 
-**Every API response** carries `_html_url` (console deep link) and `_links` (next-step operations) — rendered as a `Console:` / `Next:` footer on single objects, kept raw in JSON mode.
+**API objects** carry `_html_url` (console deep link) and `_links` (next-step operations) — rendered as a `Console:` / `Next:` footer on single objects, kept raw in JSON mode.
 
 ## Core Workflows
 
@@ -111,21 +112,20 @@ Read-only by default; writes need a credential with the `agent_tools:write` scop
 ### Talking to the agent
 
 ```bash
-polylane thread ask "<prompt>" [--context <ids>]   # blocking; ids typed by prefix (repo_, acc_, …)
-polylane thread ask "<prompt>" --stream            # tokens to stdout
+polylane thread ask "<prompt>" [--context <ids>]   # blocking, streams the reply to stdout in text mode; ids typed by prefix (repo_, acc_, thrd_, mem_; anything else is a resource node)
 TID=$(polylane thread ask "<prompt>" --no-wait --output json --quiet | jq -r '.id')
 polylane thread continue "$TID" "<follow-up>"
 ```
 
 ### Wiring coding agents
 
-`polylane setup [--agent claude|cursor|opencode|codex|…] [--project]` installs this skill and registers the MCP server (`https://mcp.polylane.com/mcp`) in each agent's config. Idempotent.
+`polylane setup [--agent claude|cursor|opencode|codex|…] [--project]` registers the MCP server (`https://mcp.polylane.com/mcp`) in each detected (or named) agent's config, and installs this skill as `skills/polylane-cli/SKILL.md` for agents that load skills (claude, cursor, opencode, codex, pi, warp). Idempotent.
 
 ## Gotchas No Help Text Confesses
 
-- **Browser-flow commands** (`auth login`, `integration connect`, `cloud connect` for OAuth-style providers) exit 0 when the URL is *generated*, not when the install completes upstream — re-query with `list` / `show` to confirm.
+- **Browser-flow connects** (`integration connect`, `cloud connect` for OAuth-style providers) print the URL to stdout. In an interactive terminal they then poll until the connection appears (about 5 min; 15 for AWS): a timeout exits 1, Ctrl+C exits 0 while setup continues in the browser. With `--output json`, `--non-interactive`, `--dry-run`, or no TTY they exit 0 as soon as the URL is printed. Either way, re-query with `list` / `show` to confirm.
 - **Partial success still exits 0**: connect-style operations can return `{ accounts: [...], failures: [...] }` — inspect `failures`.
 - **`--since` means two things**: a duration string (`1h`, `7d`) on `service logs` / `service metrics` / `feed`, but **unix milliseconds** on `issue list` (as are `--from` / `--to` everywhere).
-- **Destructive commands** need `--yes` when non-interactive (else exit 2); a cancelled confirmation exits 0 with `Cancelled` on stderr.
+- **Destructive commands** are inconsistent when non-interactive: `cloud disconnect` / `integration disconnect` exit 2 without `--yes`, but `memory delete`, `note delete`, `artifact delete` and `auth logout` proceed **without asking**. A cancelled confirmation exits 0 with `Cancelled. Nothing changed.` on stderr.
 - **`auth signup` is idempotent** for an existing user with a matching password — safe to re-run to renew a session.
-- **Streaming** (`--stream`): WebSocket upgrade 401/403 exits 3; other socket failures exit 6.
+- **`thread ask` / `continue` wait at most 10 minutes**: on timeout they still exit 0 (JSON `status: "pending"`) — follow up with `polylane thread show <id>`. `--stream` is deprecated and does nothing.

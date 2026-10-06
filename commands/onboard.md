@@ -24,10 +24,10 @@ When this command is invoked:
    ```bash
    npm install -g @coreplane/polylane@0.2.48
    ```
-2. **Authenticate.** `polylane auth login` (browser OAuth) — use `--no-browser` over SSH, or `auth signup --email <email>` for a new account (a 6-digit code is emailed). Verify with `polylane auth status`.
+2. **Authenticate.** `polylane auth login` (browser OAuth) — use `--no-browser` over SSH, or `auth signup --email <email>` for a new account (without `--password` a strong one is generated and shown once; a 6-digit code is emailed; finish non-interactively with `auth signup --email <email> --code <code>`). Verify with `polylane auth status`.
 3. **Workspace.** `polylane workspace list`; create one if needed: `polylane workspace create --name "<name>"` (becomes the default).
 4. **Discover what can be connected.** `polylane integration catalog` (`--category tool` / `--category cloud`). Match against $ARGUMENTS and what the user's project actually uses (check the repo for provider config files before recommending).
-5. **Connect integrations and clouds.** Each type has its own flags — check `polylane integration connect --help` / `polylane cloud connect --help` first. Browser flows print an install URL to stdout and exit 0 immediately; **confirm completion afterwards** with `integration list` / `cloud list`. Never echo API keys into the command history — prefer browser flows, or let the user paste keys interactively.
+5. **Connect integrations and clouds.** Each type has its own flags — check `polylane integration connect --help` / `polylane cloud connect --help` first. Browser flows print an install URL to stdout; in an interactive terminal they wait for the connection to appear (exit 1 on timeout, exit 0 if interrupted with Ctrl+C), and with `--output json`, `--non-interactive`, or no TTY they exit 0 as soon as the URL is printed; **confirm completion afterwards** with `integration list` / `cloud list`. Never echo API keys into the command history — prefer browser flows, or let the user paste keys interactively.
 6. **Wire up coding agents.** `polylane setup --agent claude` (and any others the user works in) installs the skill and MCP server locally.
 7. **Verify everything.**
    ```bash
