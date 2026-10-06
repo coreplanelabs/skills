@@ -32,7 +32,7 @@ PYBIN="${CODEX_VALIDATOR_PYTHON:-python3}"
 if [ ! -f "$PV" ] || [ ! -f "$SV" ]; then
   echo "skip: validators not found under ~/.codex/skills/.system (install Codex CLI or app)"
 elif ! "$PYBIN" -c 'import yaml' 2>/dev/null; then
-  echo "skip: PyYAML missing for $PYBIN (pip install pyyaml, or set CODEX_VALIDATOR_PYTHON)"
+  echo "skip: PyYAML missing for $PYBIN (pip install pyyaml==6.0.3, or set CODEX_VALIDATOR_PYTHON)"
 else
   if out="$("$PYBIN" "$PV" . 2>&1)"; then echo "ok   .codex-plugin/plugin.json"
   else echo "FAIL .codex-plugin/plugin.json"; printf '%s\n' "$out" | sed 's/^/     /'; fail=1; fi
@@ -51,7 +51,7 @@ if command -v npx >/dev/null 2>&1 && command -v curl >/dev/null 2>&1; then
     for pair in "plugin.schema.json:.cursor-plugin/plugin.json" \
                 "marketplace.schema.json:.cursor-plugin/marketplace.json"; do
       schema="${pair%%:*}"; data="${pair##*:}"
-      if out="$(npx --yes -p ajv-cli@5 -p ajv-formats@2 ajv validate --spec=draft7 -c ajv-formats \
+      if out="$(npx --yes -p ajv-cli@5.0.0 -p ajv-formats@2.1.1 ajv validate --spec=draft7 -c ajv-formats \
                  -s "$tmp/$schema" -d "$data" 2>&1)"; then echo "ok   $data"
       else echo "FAIL $data"; printf '%s\n' "$out" | sed 's/^/     /'; fail=1; fi
     done

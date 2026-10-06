@@ -22,7 +22,7 @@ When this command is invoked:
 
 1. **Install the CLI** if missing (`polylane --version`):
    ```bash
-   npm install -g @coreplane/polylane        # or: curl -fsSL https://polylane.com/install.sh | bash
+   npm install -g @coreplane/polylane@0.2.48
    ```
 2. **Authenticate.** `polylane auth login` (browser OAuth) — use `--no-browser` over SSH, or `auth signup --email <email>` for a new account (a 6-digit code is emailed). Verify with `polylane auth status`.
 3. **Workspace.** `polylane workspace list`; create one if needed: `polylane workspace create --name "<name>"` (becomes the default).
