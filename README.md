@@ -168,3 +168,17 @@ hook, or MCP server executes them.
 
 Claude Code 2.1.281 or later is required to validate directory listing fields
 such as `privacyPolicyUrl` without unknown-field warnings.
+
+The Claude manifest supplies the directory icon, documentation, support, privacy,
+and terms links. Its icon uses `assets/logo.png`, rendered from
+`coreplanelabs/company`'s `Polylane_Logo_Marketing_Icon_DarkBg_Primary.svg`.
+The commands pre-approve local reads only (`Read`, `Glob`, `Grep`); shell commands
+and web fetches follow the user's normal permission settings.
+
+In the submission's Settings tab, enable **This plugin collects or transmits user
+data** because both MCP servers receive remote requests. After a release merges,
+use **Check for new commits**, then verify the version and commit on the Versions
+tab. The Review tab can still show an older version that is with a reviewer.
+The Listing tab records the original submission details; newer scans do not
+refresh those historical values. Image-reference warnings still require
+Anthropic's review even though these assets are only displayed as branding.

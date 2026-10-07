@@ -1,7 +1,7 @@
 {
   "name": "polylane",
   "displayName": "Polylane",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Investigate production issues and assess change impact with Polylane: live logs, metrics, traces, deployments, the cloud infrastructure context graph, and the polylane CLI",
   "author": {
     "name": "Coreplane Labs",
@@ -22,5 +22,9 @@
     "mcp",
     "cli"
   ],
-  "privacyPolicyUrl": "https://polylane.com/privacy/"
+  "privacyPolicyUrl": "https://polylane.com/privacy/",
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://docs.polylane.com/tools/plugins",
+  "supportUrl": "https://polylane.com/developers/#support",
+  "termsOfServiceUrl": "https://polylane.com/terms/"
 }
