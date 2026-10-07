@@ -1,7 +1,7 @@
 ---
 description: Set up Polylane — account, workspace, integrations, and cloud accounts
 argument-hint: [what to connect, e.g. "aws + datadog"]
-allowed-tools: [Read, Glob, Grep, Bash, WebFetch]
+allowed-tools: [Read, Glob, Grep]
 ---
 
 # Onboard onto Polylane

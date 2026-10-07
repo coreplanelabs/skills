@@ -1,7 +1,7 @@
 ---
 description: Investigate a production issue with Polylane — logs, metrics, dependency graph, code, and recent changes
 argument-hint: [issue-id or symptom description]
-allowed-tools: [Read, Glob, Grep, Bash, WebFetch]
+allowed-tools: [Read, Glob, Grep]
 ---
 
 # Investigate a Production Issue with Polylane

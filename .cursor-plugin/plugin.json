@@ -1,7 +1,7 @@
 {
   "name": "polylane",
   "displayName": "Polylane",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minClientVersions": {
     "cursor": "3.13.0"
   },
