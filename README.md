@@ -63,8 +63,23 @@ Neither has a plugin marketplace entry yet. Use [the skills CLI](#skills-cli) be
 Install using the [skills](https://skills.sh) CLI:
 
 ```
-npx skills@1.7.1 add https://github.com/coreplanelabs/skills
+npx skills@1.7.1 add https://github.com/coreplanelabs/skills --full-depth --skill polylane polylane-cli
 ```
+
+The root `SKILL.md` is a separate `polylane-connect` skill. `--full-depth` keeps
+the installer searching for the two existing skills under `skills/`. To install
+only the connection skill, use `--skill polylane-connect` instead.
+
+### Gemini CLI
+
+```bash
+gemini extensions install https://github.com/coreplanelabs/skills
+```
+
+The extension registers both MCP servers and loads the two existing skills.
+Use `/mcp auth polylane` when Gemini prompts for product authentication. The
+documentation server needs no authentication. See [registry discovery](docs/registry-discovery.md)
+for gallery listing requirements and validation limits.
 
 ### polylane setup
 
@@ -142,6 +157,7 @@ This plugin includes Polylane's remote MCP servers:
 | [`rules/`](rules/) | The Cursor rule (`polylane.mdc`) that steers the agent to retrieve Polylane docs before acting |
 | [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
 | [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
+| [`server.json`](server.json), [`glama.json`](glama.json), [`gemini-extension.json`](gemini-extension.json), [`SKILL.md`](SKILL.md) | Registry metadata, Gemini extension, and standalone connection skill; see [registry discovery](docs/registry-discovery.md) |
 | [`scripts/validate.sh`](scripts/validate.sh) | The pre-PR check over every manifest and both MCP files |
 | [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px), `icon.png` (256px), and the vector `logo.svg`, all from the brand kit's green-on-ink icon tile |
 
@@ -149,7 +165,12 @@ Privacy policy: <https://polylane.com/privacy/>
 
 ## Publishing
 
-This repository is the single source for the Polylane plugin in three directories. Each agent reads its own manifest:
+This repository contains the Polylane plugin manifests for three agent directories.
+Each directory requires its own submission or listing process; files alone do not
+confirm publication. See [registry discovery and publishing](docs/registry-discovery.md)
+for the MCP Registry, Glama, Gemini CLI, and skills directories.
+
+Each agent reads its own manifest:
 
 | Agent | Manifest | Directory |
 |-------|----------|-----------|
@@ -157,7 +178,17 @@ This repository is the single source for the Polylane plugin in three directorie
 | Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | Cursor Marketplace |
 | OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
 
-Run [`scripts/validate.sh`](scripts/validate.sh) before opening a pull request. It parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.
+Install the pinned validation dependencies into a virtual environment, then run
+the checks (schema validation requires network access):
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r scripts/requirements-validation.txt
+CODEX_VALIDATOR_PYTHON=.venv/bin/python bash scripts/validate.sh
+```
+
+Run [`scripts/validate.sh`](scripts/validate.sh) for pull requests. It validates the official MCP Registry and Glama schemas, Gemini endpoint
+consistency, and all skill frontmatter. It also parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.
 
 For Claude directory submissions, bump the plugin version before resubmitting
 the latest commit from this repository and the same plugin folder. Keep every
