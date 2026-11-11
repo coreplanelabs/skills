@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validate the Polylane plugin for Claude Code, Cursor, and OpenAI Codex.
+# Validate Polylane plugins, skills, and registry discovery metadata.
 # Runs whatever validators are installed locally and skips the rest.
 set -u
 cd "$(dirname "$0")/.."
@@ -10,12 +10,16 @@ say "JSON manifests parse"
 for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json \
          .cursor-plugin/plugin.json .cursor-plugin/marketplace.json \
          .codex-plugin/plugin.json .agents/plugins/marketplace.json \
-         .mcp.json mcp.json; do
+         .mcp.json mcp.json server.json glama.json gemini-extension.json; do
   if python3 -m json.tool "$f" >/dev/null 2>&1; then echo "ok   $f"; else echo "FAIL $f"; fail=1; fi
 done
 
 say "mcp.json (Cursor) and .mcp.json (Claude Code, Codex) are identical"
 if diff -q mcp.json .mcp.json >/dev/null; then echo "ok"; else echo "FAIL: files differ"; fail=1; fi
+
+say "Registry discovery: schemas, endpoints, Gemini, and skill frontmatter"
+if "${CODEX_VALIDATOR_PYTHON:-python3}" scripts/validate-discovery.py; then :
+else fail=1; fi
 
 say "Claude Code: claude plugin validate --strict"
 if command -v claude >/dev/null 2>&1; then
@@ -36,7 +40,7 @@ elif ! "$PYBIN" -c 'import yaml' 2>/dev/null; then
 else
   if out="$("$PYBIN" "$PV" . 2>&1)"; then echo "ok   .codex-plugin/plugin.json"
   else echo "FAIL .codex-plugin/plugin.json"; printf '%s\n' "$out" | sed 's/^/     /'; fail=1; fi
-  for d in skills/*/; do
+  for d in . skills/*/; do
     if out="$("$PYBIN" "$SV" "$d" 2>&1)"; then echo "ok   $d"
     else echo "FAIL $d"; printf '%s\n' "$out" | sed 's/^/     /'; fail=1; fi
   done

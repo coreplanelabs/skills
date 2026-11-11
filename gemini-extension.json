@@ -1,0 +1,13 @@
+{
+  "name": "polylane",
+  "version": "1.2.1",
+  "description": "Investigate production issues with Polylane using live telemetry, infrastructure context, and code.",
+  "mcpServers": {
+    "polylane": {
+      "httpUrl": "https://mcp.polylane.com/mcp"
+    },
+    "polylane-docs": {
+      "httpUrl": "https://docs.polylane.com/mcp"
+    }
+  }
+}

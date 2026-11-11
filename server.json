@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.coreplanelabs/polylane",
+  "title": "Polylane",
+  "description": "Investigate production issues using live telemetry, infrastructure context, and code.",
+  "version": "1.0.0",
+  "websiteUrl": "https://polylane.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.polylane.com/mcp"
+    }
+  ]
+}
