@@ -1,6 +1,6 @@
 ---
 description: Set up Polylane — account, workspace, integrations, and cloud accounts
-argument-hint: [what to connect, e.g. "aws + datadog"]
+argument-hint: '[what to connect, e.g. "aws + datadog"]'
 allowed-tools: [Read, Glob, Grep]
 ---
 
@@ -22,7 +22,7 @@ When this command is invoked:
 
 1. **Install the CLI** if missing (`polylane --version`):
    ```bash
-   npm install -g @coreplane/polylane@0.2.48
+   npm install -g @coreplane/polylane@0.2.54
    ```
 2. **Authenticate.** `polylane auth login` (browser OAuth) — use `--no-browser` over SSH, or `auth signup --email <email>` for a new account (without `--password` a strong one is generated and shown once; a 6-digit code is emailed; finish non-interactively with `auth signup --email <email> --code <code>`). Verify with `polylane auth status`.
 3. **Workspace.** `polylane workspace list`; create one if needed: `polylane workspace create --name "<name>"` (becomes the default).
