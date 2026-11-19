@@ -1,6 +1,6 @@
 {
   "name": "polylane",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Investigate production issues with Polylane using live telemetry, infrastructure context, and code.",
   "mcpServers": {
     "polylane": {

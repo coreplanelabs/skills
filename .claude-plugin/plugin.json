@@ -1,7 +1,7 @@
 {
   "name": "polylane",
   "displayName": "Polylane",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Investigate production issues and assess change impact with Polylane: live logs, metrics, traces, deployments, the cloud infrastructure context graph, and the polylane CLI",
   "author": {
     "name": "Coreplane Labs",
