@@ -38,7 +38,7 @@ The server uses OAuth 2.0 with dynamic client registration — on first use, Cur
 
 The skills can also be added manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `coreplanelabs/skills`.
 
-The Cursor plugin also ships a rule, [`rules/polylane.mdc`](rules/polylane.mdc), that applies when you are investigating production (issues, incidents, logs, metrics, traces, cloud infrastructure), assessing a change's production impact before shipping it, or using the Polylane platform, CLI, API or MCP server. Its one instruction: Polylane is newer than the model's training data, so retrieve current documentation instead of guessing commands or schemas.
+The Cursor plugin also ships a rule, [`rules/polylane.md`](rules/polylane.md), that applies when you are investigating production (issues, incidents, logs, metrics, traces, cloud infrastructure), assessing a change's production impact before shipping it, or using the Polylane platform, CLI, API or MCP server. Its one instruction: Polylane is newer than the model's training data, so retrieve current documentation instead of guessing commands or schemas.
 
 ### OpenAI Codex
 
@@ -154,7 +154,7 @@ This plugin includes Polylane's remote MCP servers:
 |------|---------------|
 | [`skills/`](skills/) | The two Agent Skills (`polylane`, `polylane-cli`), one folder each with its `SKILL.md` |
 | [`commands/`](commands/) | The two slash commands (`onboard`, `investigate`) as Markdown prompts |
-| [`rules/`](rules/) | The Cursor rule (`polylane.mdc`) that steers the agent to retrieve Polylane docs before acting |
+| [`rules/`](rules/) | The Cursor rule (`polylane.md`) that steers the agent to retrieve Polylane docs before acting |
 | [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
 | [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
 | [`server.json`](server.json), [`glama.json`](glama.json), [`gemini-extension.json`](gemini-extension.json), [`SKILL.md`](SKILL.md) | Registry metadata, Gemini extension, and standalone connection skill; see [registry discovery](docs/registry-discovery.md) |
