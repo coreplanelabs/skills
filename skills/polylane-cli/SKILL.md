@@ -29,7 +29,7 @@ Concepts, schemas, and limits: <https://docs.polylane.com> (model-readable, no a
 
 ```bash
 # Install the reviewed CLI version (Node.js 20 or later)
-npm install -g @coreplane/polylane@0.2.48
+npm install -g @coreplane/polylane@0.2.54
 
 # Auth — OAuth is the default; API key where a browser is impossible
 polylane auth login                                    # OAuth browser (PKCE)

@@ -1,6 +1,6 @@
 ---
 description: Investigate a production issue with Polylane — logs, metrics, dependency graph, code, and recent changes
-argument-hint: [issue-id or symptom description]
+argument-hint: "[issue-id or symptom description]"
 allowed-tools: [Read, Glob, Grep]
 ---
 
