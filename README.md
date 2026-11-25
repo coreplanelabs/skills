@@ -158,8 +158,7 @@ This plugin includes Polylane's remote MCP servers:
 | [`.claude-plugin/`](.claude-plugin/), [`.cursor-plugin/`](.cursor-plugin/), [`.codex-plugin/`](.codex-plugin/), [`.agents/`](.agents/) | One manifest per agent, plus the marketplaces that list this plugin (see Publishing) |
 | [`.mcp.json`](.mcp.json), [`mcp.json`](mcp.json) | The MCP server registrations; the two files must stay identical (Claude Code and Codex read the dotted one, Cursor the other) |
 | [`server.json`](server.json), [`glama.json`](glama.json), [`gemini-extension.json`](gemini-extension.json), [`SKILL.md`](SKILL.md) | Registry metadata, Gemini extension, and standalone connection skill; see [registry discovery](docs/registry-discovery.md) |
-| [`scripts/validate.sh`](scripts/validate.sh) | The pre-PR check over every manifest and both MCP files |
-| [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px), `icon.png` (256px), and the vector `logo.svg`, all from the brand kit's green-on-ink icon tile |
+| [`assets/`](assets/) | The Polylane face mark the marketplaces show: `logo.png` (1024px) and `icon.png` (256px), both from the brand kit's green-on-ink icon tile |
 
 Privacy policy: <https://polylane.com/privacy/>
 
@@ -178,17 +177,8 @@ Each agent reads its own manifest:
 | Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | Cursor Marketplace |
 | OpenAI Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) + [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | Codex plugin directory |
 
-Install the pinned validation dependencies into a virtual environment, then run
-the checks (schema validation requires network access):
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r scripts/requirements-validation.txt
-CODEX_VALIDATOR_PYTHON=.venv/bin/python bash scripts/validate.sh
-```
-
-Run [`scripts/validate.sh`](scripts/validate.sh) for pull requests. It validates the official MCP Registry and Glama schemas, Gemini endpoint
-consistency, and all skill frontmatter. It also parses every manifest, checks that `mcp.json` (read by Cursor) and `.mcp.json` (read by Claude Code and Codex) stay identical, and runs `claude plugin validate --strict`, Codex's bundled plugin and skill validators, and Cursor's official JSON schemas for whichever tools are installed.
+Before a pull request, run `claude plugin validate --strict .` and the
+validators each other directory provides for its own manifest.
 
 For Claude directory submissions, bump the plugin version before resubmitting
 the latest commit from this repository and the same plugin folder. Keep every
